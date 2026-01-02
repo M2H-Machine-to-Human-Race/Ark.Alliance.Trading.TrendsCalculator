@@ -350,7 +350,7 @@ Then create a pull request on GitHub.
 
 ### 6. Review Process
 
-- **All PRs require approval** from the project owner (@Criprtoswiss)
+- **All PRs require approval** from the project owner (@ArmandRicheletKleinberg)
 - The repository uses a **CODEOWNERS** file that automatically requests reviews
 - PRs must target the `develop` branch (not `main` directly)
 - Address feedback promptly
@@ -400,7 +400,7 @@ Then create a pull request on GitHub.
 
 ### Governance
 
-- **Project Owner**: @Criprtoswiss (Armand Richelet-Kleinberg)
+- **Project Owner**: @ArmandRicheletKleinberg (Armand Richelet-Kleinberg)
 - **All contributions** require owner approval via CODEOWNERS
 - **New members** must be approved by the project owner
 - **Branch protection** enforced on `main` and `develop` branches

@@ -2,28 +2,28 @@
 # This file defines who is responsible for code review and approval
 
 # Default owner for all files - requires approval from project owner
-* @Criprtoswiss
+* @ArmandRicheletKleinberg
 
 # Backend code ownership
-/Ark.Alliance.TrendsCalculator.Backend/ @Criprtoswiss
+/Ark.Alliance.TrendsCalculator.Backend/ @ArmandRicheletKleinberg
 
 # Frontend code ownership  
-/Ark.Alliance.TrendsCalculator.Ui/ @Criprtoswiss
+/Ark.Alliance.TrendsCalculator.Ui/ @ArmandRicheletKleinberg
 
 # Shared DTOs and Enums
-/Ark.Alliance.TrendsCalculator.Share/ @Criprtoswiss
+/Ark.Alliance.TrendsCalculator.Share/ @ArmandRicheletKleinberg
 
 # Test suite
-/Ark.Alliance.TrendsCalculator.Tests/ @Criprtoswiss
+/Ark.Alliance.TrendsCalculator.Tests/ @ArmandRicheletKleinberg
 
 # Documentation
-*.md @Criprtoswiss
-/Docs/ @Criprtoswiss
+*.md @ArmandRicheletKleinberg
+/Docs/ @ArmandRicheletKleinberg
 
 # CI/CD and GitHub configuration
-/.github/ @Criprtoswiss
+/.github/ @ArmandRicheletKleinberg
 
 # Root configuration files
-/*.json @Criprtoswiss
-/*.yml @Criprtoswiss
-/*.yaml @Criprtoswiss
+/*.json @ArmandRicheletKleinberg
+/*.yml @ArmandRicheletKleinberg
+/*.yaml @ArmandRicheletKleinberg
