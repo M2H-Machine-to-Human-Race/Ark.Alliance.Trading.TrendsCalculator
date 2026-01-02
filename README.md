@@ -21,14 +21,14 @@
 
 ## What is This?
 
-A **full-stack TypeScript platform** combining real-time market data streaming with advanced mathematical analysis (Hurst Exponent, GARCH, Linear Regression, EMA) and AI-powered decision support via Google Gemini.
+A **full-stack TypeScript platform** combining real-time market data streaming with advanced mathematical analysis (Hurst Exponent, GARCH, Linear Regression, EMA) and AI-powered decision support via multiple providers (Anthropic, OpenAI, Google Gemini).
 
 **Use Cases:** Algorithmic trading • Market analysis • Quantitative research • Trading education
 
 **Core Capabilities:**
 - Real-time trend calculation with WebSocket streaming from Binance
 - Mathematical indicators: Hurst Exponent, GARCH forecasting, Linear Regression, EMA crossovers
-- AI-powered analysis with confidence scoring (Google Gemini)
+- AI-powered analysis with confidence scoring (Anthropic, OpenAI, Gemini)
 - Walk-forward validation and backtesting capabilities
 - MVVM architecture with ark-alliance-react-ui component library
 
@@ -43,7 +43,7 @@ graph LR
     API[Express REST API<br/>WebSocket Server]
     Domain[Mathematical Engine<br/>Trend Calculator]
     Ext1[Binance Futures]
-    Ext2[Google Gemini AI]
+    Ext2[AI Providers]
     Share[Shared DTOs & Enums]
     
     UI -->|HTTP/WS| API
@@ -75,7 +75,7 @@ graph LR
 - Node.js >= 18.0.0
 - npm >= 8.0.0
 - (Optional) Binance account for live data
-- (Optional) Google Gemini API key for AI features
+- (Optional) AI API key (Anthropic, OpenAI, or Gemini) for AI features
 
 ### Installation
 
@@ -114,7 +114,11 @@ BINANCE_API_KEY=your_key
 BINANCE_SECRET_KEY=your_secret
 
 # AI (optional)
+# AI Provider (choose one)
+AI_PROVIDER=gemini       # Options: anthropic, openai, gemini
 GEMINI_API_KEY=your_gemini_key
+# OPENAI_API_KEY=your_openai_key
+# ANTHROPIC_API_KEY=your_anthropic_key
 
 # Analysis
 DEFAULT_BUFFER_SIZE=200
@@ -154,7 +158,7 @@ MIN_BUFFER_SIZE=50
 | Backend | Node.js 18+, Express, TypeScript 5.6, Socket.IO Server, ark-alliance-trading-providers-lib |
 | Shared | TypeScript, Zod validation |
 | Testing | Vitest, 148 test cases, 98.6% pass rate |
-| External | Binance Futures API, Google Gemini AI |
+| External | Binance Futures API, Multi-provider AI (Anthropic, OpenAI, Gemini) |
 
 ---
 
