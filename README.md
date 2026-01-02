@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![Build Status](https://github.com/ArmandRicheletKleinberg/Ark.Alliance.Trading.TrendsCalculator/actions/workflows/ci.yml/badge.svg)](https://github.com/ArmandRicheletKleinberg/Ark.Alliance.Trading.TrendsCalculator/actions)
+[![Build Status](https://github.com/M2H-Machine-to-Human-Race/Ark.Alliance.Trading.TrendsCalculator/actions/workflows/ci.yml/badge.svg)](https://github.com/M2H-Machine-to-Human-Race/Ark.Alliance.Trading.TrendsCalculator/actions)
 [![Tests](https://img.shields.io/badge/tests-98.6%25_passing-brightgreen)]()
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-19.0-61dafb)](https://react.dev/)
@@ -81,7 +81,7 @@ graph LR
 
 ```bash
 # Clone and navigate
-git clone https://github.com/ArmandRicheletKleinberg/Ark.Alliance.Trading.TrendsCalculator.git
+git clone https://github.com/M2H-Machine-to-Human-Race/Ark.Alliance.Trading.TrendsCalculator.git
 cd Ark.Alliance.Trading.TrendsCalculator
 
 # Install and build Share library (required first)
@@ -235,6 +235,6 @@ M2H.Io Ark.Alliance Ecosystem
 
 <div align="center">
 
-**[⭐ Star on GitHub](https://github.com/ArmandRicheletKleinberg/Ark.Alliance.Trading.TrendsCalculator)** • **[🐛 Report Issues](https://github.com/ArmandRicheletKleinberg/Ark.Alliance.Trading.TrendsCalculator/issues)** • **[💬 Contributing](./CONTRIBUTING.md)**
+**[⭐ Star on GitHub](https://github.com/M2H-Machine-to-Human-Race/Ark.Alliance.Trading.TrendsCalculator)** • **[🐛 Report Issues](https://github.com/M2H-Machine-to-Human-Race/Ark.Alliance.Trading.TrendsCalculator/issues)** • **[💬 Contributing](./CONTRIBUTING.md)**
 
 </div>
