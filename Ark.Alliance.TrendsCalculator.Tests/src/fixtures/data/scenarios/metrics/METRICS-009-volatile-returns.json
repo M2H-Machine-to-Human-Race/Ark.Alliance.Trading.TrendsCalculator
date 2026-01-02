@@ -1,0 +1,28 @@
+{
+    "id": "METRICS-009",
+    "name": "Volatile Returns",
+    "description": "High variance in trade outcomes with unpredictable results",
+    "category": "metrics",
+    "tradeCount": 100,
+    "generator": "generateVolatileReturns",
+    "expected": {
+        "returnVariance": {
+            "min": 5.0,
+            "max": 20.0
+        },
+        "standardDeviation": {
+            "min": 8.0,
+            "max": 15.0
+        },
+        "consistency": {
+            "min": 0.0,
+            "max": 0.3
+        }
+    },
+    "assertions": [
+        "High variance of returns",
+        "Large standard deviation",
+        "Low consistency score",
+        "Unpredictable outcomes"
+    ]
+}

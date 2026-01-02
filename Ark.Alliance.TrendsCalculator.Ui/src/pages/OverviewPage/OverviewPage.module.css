@@ -1,0 +1,503 @@
+/**
+ * OverviewPage Styles - 2026 Dashboard Design
+ * 
+ * Modern command-center layout with glassmorphism and micro-animations
+ */
+
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem 2rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LOADING STATE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: 1rem;
+    color: var(--ark-text-muted);
+    font-size: 1rem;
+}
+
+.loadingSpinner {
+    width: 48px;
+    height: 48px;
+    border: 3px solid rgba(59, 130, 246, 0.2);
+    border-top-color: var(--ark-accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--ark-border-subtle);
+}
+
+.headerContent {
+    flex: 1;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--ark-text-primary);
+    margin: 0 0 0.25rem 0;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.titleGradient {
+    background: linear-gradient(135deg, var(--ark-primary-light) 0%, var(--ark-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    color: var(--ark-text-muted);
+    margin: 0;
+    font-size: 0.9375rem;
+}
+
+.connectionStatus {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--ark-bg-surface);
+    border-radius: var(--radius-full);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--ark-text-secondary);
+}
+
+.statusOnline {
+    color: var(--ark-success);
+    font-size: 0.5rem;
+    animation: pulse-soft 2s infinite;
+}
+
+.statusOffline {
+    color: var(--ark-error);
+    font-size: 0.5rem;
+}
+
+@keyframes pulse-soft {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   METRICS STRIP
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.metricsStrip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.metricValue {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--ark-text-primary);
+    line-height: 1.1;
+    margin-top: 0.5rem;
+}
+
+.metricSub {
+    font-size: 0.75rem;
+    color: var(--ark-text-muted);
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DASHBOARD GRID
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.dashboardGrid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 1.5rem;
+}
+
+.leftColumn,
+.rightColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   GAUGES SECTION
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.gaugesSection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.gaugeCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    background: var(--ark-bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--ark-border-subtle);
+}
+
+.gaugeCaption {
+    margin-top: 0.75rem;
+    font-size: 0.8125rem;
+    color: var(--ark-text-muted);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ACTIVE CALCULATIONS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.calculationsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.75rem;
+}
+
+.calcCard {
+    padding: 0.875rem;
+    background: rgba(17, 24, 39, 0.6);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--ark-border);
+}
+
+.calcHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.calcSymbol {
+    font-weight: 600;
+    color: var(--ark-text-primary);
+}
+
+.calcProgress {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--ark-accent);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.calcProgressBar {
+    height: 4px;
+    background: rgba(17, 24, 39, 0.8);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.calcProgressFill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--ark-primary) 0%, var(--ark-accent) 100%);
+    border-radius: var(--radius-full);
+    transition: width 0.5s ease-out;
+    position: relative;
+}
+
+.calcProgressFill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.calcStatus {
+    font-size: 0.6875rem;
+    color: var(--ark-text-muted);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PERFORMERS TABLE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.performersTable {
+    display: flex;
+    flex-direction: column;
+}
+
+.tableHeader {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 0.8fr 1.2fr;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: rgba(59, 130, 246, 0.08);
+    border-radius: var(--radius-md);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ark-text-muted);
+}
+
+.tableRow {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 0.8fr 1.2fr;
+    gap: 1rem;
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid var(--ark-border-subtle);
+    align-items: center;
+    transition: background 0.2s ease;
+}
+
+.tableRow:hover {
+    background: rgba(59, 130, 246, 0.04);
+}
+
+.tableRow:last-child {
+    border-bottom: none;
+}
+
+.symbolCell {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: var(--ark-text-primary);
+}
+
+.symbolIcon {
+    color: var(--ark-primary);
+    font-size: 0.875rem;
+}
+
+.directionCell {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+}
+
+.directionLONG {
+    color: var(--ark-long);
+}
+
+.directionSHORT {
+    color: var(--ark-short);
+}
+
+.directionWAIT {
+    color: var(--ark-wait);
+}
+
+.scoreCell {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875rem;
+    color: var(--ark-text-secondary);
+}
+
+.confidenceCell {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.confidenceBar {
+    flex: 1;
+    height: 6px;
+    background: rgba(17, 24, 39, 0.8);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.confidenceFill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--ark-primary) 0%, var(--ark-success) 100%);
+    border-radius: var(--radius-full);
+}
+
+.confidenceCell span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--ark-text-secondary);
+    min-width: 32px;
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ACTIVITY FEED
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.activityFeed {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.activityItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.875rem;
+    padding: 0.75rem;
+    background: rgba(59, 130, 246, 0.04);
+    border-radius: var(--radius-md);
+    border-left: 3px solid var(--ark-primary);
+    transition: all 0.2s ease;
+}
+
+.activityItem:hover {
+    background: rgba(59, 130, 246, 0.08);
+}
+
+.activityDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ark-primary);
+    flex-shrink: 0;
+    margin-top: 0.375rem;
+    box-shadow: 0 0 8px var(--ark-glow-blue);
+}
+
+.activitytrend_change .activityDot {
+    background: var(--ark-accent);
+}
+
+.activityai_analysis .activityDot {
+    background: var(--ark-accent-purple);
+}
+
+.activitysymbol_added .activityDot {
+    background: var(--ark-success);
+}
+
+.activitysymbol_removed .activityDot {
+    background: var(--ark-warning);
+}
+
+.activitywarning .activityDot {
+    background: var(--ark-warning);
+}
+
+.activityerror .activityDot {
+    background: var(--ark-error);
+}
+
+.activityContent {
+    flex: 1;
+    min-width: 0;
+}
+
+.activityMessage {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--ark-text-primary);
+    line-height: 1.4;
+}
+
+.activityTime {
+    font-size: 0.6875rem;
+    color: var(--ark-text-muted);
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   EMPTY STATE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.emptyState {
+    padding: 2rem;
+    text-align: center;
+    color: var(--ark-text-muted);
+    font-size: 0.9375rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1200px) {
+    .dashboardGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .metricsStrip {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .metricsStrip {
+        grid-template-columns: 1fr;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .gaugesSection {
+        grid-template-columns: 1fr;
+    }
+
+    .tableHeader,
+    .tableRow {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+    }
+
+    .tableHeader span:nth-child(3),
+    .tableRow .scoreCell {
+        display: none;
+    }
+}

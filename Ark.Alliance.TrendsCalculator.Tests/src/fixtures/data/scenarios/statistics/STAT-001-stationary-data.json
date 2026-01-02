@@ -1,0 +1,57 @@
+{
+    "id": "STAT-001",
+    "name": "Stationarity Test - Stationary Log Returns",
+    "category": "statistics",
+    "component": "StationarityHelper",
+    "description": "Verify quickStationarityCheck returns true for stationary log returns data",
+    "mathDocReference": "Docs/Math/Stationarity_ADF_Testing.md",
+    "input": {
+        "prices": [
+            100,
+            100.5,
+            99.8,
+            100.2,
+            99.9,
+            100.3,
+            100.1,
+            99.7,
+            100.4,
+            100,
+            100.2,
+            99.9,
+            100.1,
+            100.3,
+            99.8,
+            100.5,
+            100.2,
+            99.9,
+            100.1,
+            100.4,
+            100.1,
+            99.8,
+            100.3,
+            100,
+            100.2,
+            99.9,
+            100.1,
+            100.4,
+            100.2,
+            99.8
+        ]
+    },
+    "expectedResults": {
+        "isStationary": true,
+        "varianceRatioRange": [
+            0.5,
+            2.0
+        ],
+        "meanDifferenceMax": 0.1,
+        "recommendation": "USE_PRICES"
+    },
+    "tags": [
+        "critical",
+        "stationarity",
+        "unit"
+    ],
+    "notes": "Price oscillates around 100 with low variance. Should be stationary."
+}

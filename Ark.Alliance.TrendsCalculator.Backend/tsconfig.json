@@ -1,0 +1,51 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "module": "commonjs",
+        "lib": [
+            "ES2022"
+        ],
+        "outDir": "./dist",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true,
+        "declaration": true,
+        "declarationMap": true,
+        "sourceMap": true,
+        "moduleResolution": "node",
+        "baseUrl": ".",
+        "paths": {
+            "@share/*": [
+                "../Ark.Alliance.TrendsCalculator.Share/src/*"
+            ],
+            "@domain/*": [
+                "./src/domain/*"
+            ],
+            "@application/*": [
+                "./src/application/*"
+            ],
+            "@infrastructure/*": [
+                "./src/infrastructure/*"
+            ],
+            "@presentation/*": [
+                "./src/presentation/*"
+            ],
+            "ark-alliance-trading-providers-lib": [
+                "../../Ark.Alliance.Trading.Providers.Lib/src/Ark.Alliance.Trading.Providers.Lib/Src/index.ts"
+            ],
+            "ark-alliance-trading-providers-lib/*": [
+                "../../Ark.Alliance.Trading.Providers.Lib/src/Ark.Alliance.Trading.Providers.Lib/Src/*"
+            ]
+        }
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "tests"
+    ]
+}

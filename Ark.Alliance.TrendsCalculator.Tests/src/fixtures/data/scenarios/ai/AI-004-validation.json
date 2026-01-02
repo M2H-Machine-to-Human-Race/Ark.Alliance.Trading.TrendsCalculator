@@ -1,0 +1,151 @@
+{
+    "id": "AI-004",
+    "name": "AI Prompt - Validation (Response Validation)",
+    "category": "ai",
+    "component": "AIPromptTemplates",
+    "description": "Test AI response validation logic with various valid and invalid responses",
+    "mathDocReference": "Docs/Gemini3usage_TrendsCalculator.md",
+    "input": {
+        "validResponses": [
+            {
+                "name": "Valid LONG response",
+                "response": {
+                    "symbol": "BTCUSDT",
+                    "tendance": "LONG",
+                    "sigma": 0.0035,
+                    "takeProfitPnlClick": 0.0018,
+                    "confidence": 0.82,
+                    "reasoning": "Order book imbalance at +0.28 shows strong buy pressure with ascending closes."
+                },
+                "shouldPass": true
+            },
+            {
+                "name": "Valid SHORT response",
+                "response": {
+                    "symbol": "ETHUSDT",
+                    "tendance": "SHORT",
+                    "sigma": 0.0042,
+                    "takeProfitPnlClick": 0.0021,
+                    "confidence": 0.78,
+                    "reasoning": "Heavy sell pressure at -0.31 imbalance with descending price action in last 5 candles."
+                },
+                "shouldPass": true
+            },
+            {
+                "name": "Valid WAIT response (low confidence)",
+                "response": {
+                    "symbol": "BNBUSDT",
+                    "tendance": "WAIT",
+                    "sigma": 0.0025,
+                    "takeProfitPnlClick": 0.0012,
+                    "confidence": 0.38,
+                    "reasoning": "Neutral imbalance at +0.05 with alternating closes indicating range-bound market."
+                },
+                "shouldPass": true
+            }
+        ],
+        "invalidResponses": [
+            {
+                "name": "Invalid: LONG with low confidence",
+                "response": {
+                    "symbol": "BTCUSDT",
+                    "tendance": "LONG",
+                    "sigma": 0.003,
+                    "takeProfitPnlClick": 0.0015,
+                    "confidence": 0.35,
+                    "reasoning": "Low confidence LONG should fail validation per rules."
+                },
+                "shouldPass": false,
+                "failReason": "confidence < 0.5 requires WAIT"
+            },
+            {
+                "name": "Invalid: SHORT with low confidence",
+                "response": {
+                    "symbol": "ETHUSDT",
+                    "tendance": "SHORT",
+                    "sigma": 0.004,
+                    "takeProfitPnlClick": 0.002,
+                    "confidence": 0.45,
+                    "reasoning": "Low confidence SHORT should fail validation."
+                },
+                "shouldPass": false,
+                "failReason": "confidence < 0.5 requires WAIT"
+            },
+            {
+                "name": "Invalid: sigma out of range (too low)",
+                "response": {
+                    "symbol": "BTCUSDT",
+                    "tendance": "LONG",
+                    "sigma": 0.0005,
+                    "takeProfitPnlClick": 0.002,
+                    "confidence": 0.75,
+                    "reasoning": "Testing sigma below minimum threshold of 0.001."
+                },
+                "shouldPass": false,
+                "failReason": "sigma < 0.001"
+            },
+            {
+                "name": "Invalid: sigma out of range (too high)",
+                "response": {
+                    "symbol": "BTCUSDT",
+                    "tendance": "SHORT",
+                    "sigma": 0.08,
+                    "takeProfitPnlClick": 0.002,
+                    "confidence": 0.72,
+                    "reasoning": "Testing sigma above maximum threshold of 0.05."
+                },
+                "shouldPass": false,
+                "failReason": "sigma > 0.05"
+            },
+            {
+                "name": "Invalid: takeProfitPnlClick out of range",
+                "response": {
+                    "symbol": "BTCUSDT",
+                    "tendance": "LONG",
+                    "sigma": 0.003,
+                    "takeProfitPnlClick": 0.05,
+                    "confidence": 0.68,
+                    "reasoning": "Testing takeProfitPnlClick above maximum of 0.02."
+                },
+                "shouldPass": false,
+                "failReason": "takeProfitPnlClick > 0.02"
+            },
+            {
+                "name": "Invalid: reasoning too short",
+                "response": {
+                    "symbol": "BTCUSDT",
+                    "tendance": "LONG",
+                    "sigma": 0.003,
+                    "takeProfitPnlClick": 0.0015,
+                    "confidence": 0.70,
+                    "reasoning": "Short text."
+                },
+                "shouldPass": false,
+                "failReason": "reasoning.length < 30"
+            },
+            {
+                "name": "Invalid: unknown tendance",
+                "response": {
+                    "symbol": "BTCUSDT",
+                    "tendance": "UNKNOWN",
+                    "sigma": 0.003,
+                    "takeProfitPnlClick": 0.0015,
+                    "confidence": 0.60,
+                    "reasoning": "Testing invalid tendance value that is not LONG, SHORT, or WAIT."
+                },
+                "shouldPass": false,
+                "failReason": "tendance not in [LONG, SHORT, WAIT]"
+            }
+        ]
+    },
+    "expectedResults": {
+        "validCount": 3,
+        "invalidCount": 7
+    },
+    "tags": [
+        "ai",
+        "validation",
+        "response"
+    ],
+    "notes": "Tests AIPromptTemplates.validateResponse() with comprehensive edge cases."
+}

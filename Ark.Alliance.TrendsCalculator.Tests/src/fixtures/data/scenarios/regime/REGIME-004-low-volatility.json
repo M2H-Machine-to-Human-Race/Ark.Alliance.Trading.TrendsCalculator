@@ -1,0 +1,30 @@
+{
+    "id": "REGIME-004",
+    "name": "Low Volatility (Consolidation)",
+    "description": "Tight trading range with minimal price movement",
+    "category": "regime",
+    "dataPoints": 200,
+    "generator": "generateLowVolatility",
+    "expected": {
+        "regime": "LOW_VOLATILITY",
+        "volatilityLevel": "LOW",
+        "volatilityScore": {
+            "min": 0.0,
+            "max": 0.2
+        },
+        "priceRange": {
+            "min": 0.0,
+            "max": 3.0
+        },
+        "standardDeviation": {
+            "min": 0.0,
+            "max": 0.5
+        }
+    },
+    "assertions": [
+        "Regime should be classified as LOW_VOLATILITY",
+        "Minimal price movement",
+        "Very low standard deviation",
+        "Tight price range"
+    ]
+}

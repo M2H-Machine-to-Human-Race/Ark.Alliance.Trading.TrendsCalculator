@@ -1,0 +1,23 @@
+{
+    "id": "METRICS-002",
+    "name": "Low Sharpe Ratio",
+    "description": "Poor risk-adjusted returns with erratic performance",
+    "category": "metrics",
+    "tradeCount": 100,
+    "generator": "generateLowSharpe",
+    "expected": {
+        "sharpeRatio": {
+            "min": -0.5,
+            "max": 0.5
+        },
+        "returnVolatility": {
+            "min": 5.0,
+            "max": 15.0
+        }
+    },
+    "assertions": [
+        "Sharpe ratio should be near zero or negative",
+        "High volatility of returns",
+        "Erratic performance"
+    ]
+}

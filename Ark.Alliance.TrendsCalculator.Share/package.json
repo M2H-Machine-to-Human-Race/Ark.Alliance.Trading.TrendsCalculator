@@ -1,0 +1,32 @@
+{
+    "name": "ark.alliance.trendscalculator.share",
+    "version": "1.0.0",
+    "description": "Shared DTOs and Enums for Trend Analysis Microservice",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "test": "vitest",
+        "lint": "eslint src --ext .ts"
+    },
+    "keywords": [
+        "trading",
+        "dto",
+        "enums",
+        "shared",
+        "typescript"
+    ],
+    "author": "Ark.Alliance",
+    "license": "MIT",
+    "dependencies": {
+        "zod": "^3.22.4"
+    },
+    "devDependencies": {
+        "@types/node": "^20.10.0",
+        "typescript": "^5.3.2",
+        "vitest": "^1.0.0",
+        "eslint": "^8.54.0",
+        "@typescript-eslint/eslint-plugin": "^6.12.0",
+        "@typescript-eslint/parser": "^6.12.0"
+    }
+}

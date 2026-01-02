@@ -1,0 +1,34 @@
+{
+    "id": "REGIME-001",
+    "name": "Strong Trending (Bullish)",
+    "description": "Persistent upward trending market with low volatility and high momentum",
+    "category": "regime",
+    "dataPoints": 200,
+    "generator": "generateStrongTrendingBullish",
+    "expected": {
+        "regime": "TRENDING",
+        "volatilityLevel": "LOW",
+        "trendStrength": {
+            "min": 0.7,
+            "max": 1.0
+        },
+        "meanReversionScore": {
+            "min": 0.0,
+            "max": 0.3
+        },
+        "hurstExponent": {
+            "min": 0.6,
+            "max": 1.0
+        },
+        "autocorrelation": {
+            "min": 0.5,
+            "max": 1.0
+        }
+    },
+    "assertions": [
+        "Regime should be classified as TRENDING",
+        "Volatility should be LOW",
+        "Hurst exponent should indicate trending (> 0.6)",
+        "High positive autocorrelation indicating persistence"
+    ]
+}

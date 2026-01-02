@@ -1,0 +1,27 @@
+{
+    "id": "REGIME-006",
+    "name": "Volatile Trending",
+    "description": "Strong trend combined with high volatility (risky trending)",
+    "category": "regime",
+    "dataPoints": 200,
+    "generator": "generateVolatileTrending",
+    "expected": {
+        "regime": "TRENDING",
+        "volatilityLevel": "HIGH",
+        "trendStrength": {
+            "min": 0.6,
+            "max": 1.0
+        },
+        "volatilityScore": {
+            "min": 0.6,
+            "max": 1.0
+        },
+        "riskLevel": "HIGH"
+    },
+    "assertions": [
+        "Regime should be classified as TRENDING despite high volatility",
+        "High trend strength maintained",
+        "High volatility score",
+        "Risk level should be HIGH"
+    ]
+}

@@ -1,0 +1,27 @@
+{
+    "id": "METRICS-003",
+    "name": "Large Maximum Drawdown",
+    "description": "Severe consecutive losses creating significant drawdown",
+    "category": "metrics",
+    "tradeCount": 100,
+    "generator": "generateLargeDrawdown",
+    "expected": {
+        "maxDrawdown": {
+            "min": 60,
+            "max": 100
+        },
+        "drawdownDuration": {
+            "min": 15,
+            "max": 25
+        },
+        "recoveryTrades": {
+            "min": 30,
+            "max": 50
+        }
+    },
+    "assertions": [
+        "Maximum drawdown should be severe (>60%)",
+        "Extended drawdown period",
+        "Long recovery time"
+    ]
+}

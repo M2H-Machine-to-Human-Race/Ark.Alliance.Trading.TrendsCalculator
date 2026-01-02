@@ -1,0 +1,30 @@
+{
+    "id": "REGIME-007",
+    "name": "Choppy Market",
+    "description": "Alternating micro-trends and reversals without clear direction",
+    "category": "regime",
+    "dataPoints": 200,
+    "generator": "generateChoppyMarket",
+    "expected": {
+        "regime": "CHOPPY",
+        "volatilityLevel": "MODERATE",
+        "directionChanges": {
+            "min": 8,
+            "max": 12
+        },
+        "trendStrength": {
+            "min": 0.0,
+            "max": 0.4
+        },
+        "meanReversionScore": {
+            "min": 0.3,
+            "max": 0.7
+        }
+    },
+    "assertions": [
+        "Regime should be classified as CHOPPY",
+        "Multiple direction changes detected",
+        "Low overall trend strength",
+        "Moderate mean reversion score"
+    ]
+}

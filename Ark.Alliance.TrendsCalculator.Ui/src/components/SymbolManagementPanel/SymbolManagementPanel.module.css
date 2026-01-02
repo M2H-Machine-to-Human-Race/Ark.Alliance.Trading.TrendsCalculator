@@ -1,0 +1,402 @@
+/**
+ * Symbol Management Panel Styles
+ * 
+ * Modern 2026 design with glassmorphism, gradients, and micro-animations
+ */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   ADD FORM
+   ───────────────────────────────────────────────────────────────────────── */
+
+.addForm {
+    width: 100%;
+}
+
+.inputWrapper {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    background: rgba(17, 24, 39, 0.8);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 0.5rem;
+    color: #f1f5f9;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9375rem;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.input::placeholder {
+    color: #64748b;
+}
+
+.input:focus {
+    border-color: rgba(0, 212, 255, 0.5);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.15);
+}
+
+.input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.buttonText {
+    margin-left: 0.5rem;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   SYMBOLS GRID
+   ───────────────────────────────────────────────────────────────────────── */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.gridCompact {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   SYMBOL CARD
+   ───────────────────────────────────────────────────────────────────────── */
+
+.symbolCard {
+    background: linear-gradient(145deg,
+            rgba(17, 28, 50, 0.75) 0%,
+            rgba(10, 17, 34, 0.85) 100%);
+    border: 1px solid rgba(59, 130, 246, 0.15);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.symbolCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.08) 50%,
+            transparent 100%);
+}
+
+.symbolCard:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0, 212, 255, 0.3);
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(59, 130, 246, 0.15);
+}
+
+.symbolCard[role="button"] {
+    cursor: pointer;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   SYMBOL HEADER
+   ───────────────────────────────────────────────────────────────────────── */
+
+.symbolHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.symbolName {
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: #f1f5f9;
+    letter-spacing: 0.02em;
+}
+
+.direction {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.25rem 0.625rem;
+    border-radius: 9999px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.directionDot {
+    font-size: 0.5rem;
+}
+
+.directionLong {
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.directionShort {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.directionWait {
+    color: #f59e0b;
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.directionNone {
+    color: #64748b;
+    background: rgba(100, 116, 139, 0.15);
+    border: 1px solid rgba(100, 116, 139, 0.3);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   PROGRESS BAR
+   ───────────────────────────────────────────────────────────────────────── */
+
+.progressWrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.progressBar {
+    flex: 1;
+    height: 6px;
+    background: rgba(17, 24, 39, 0.9);
+    border-radius: 9999px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.progressFill {
+    height: 100%;
+    border-radius: 9999px;
+    transition: width 0.5s ease-out;
+    position: relative;
+}
+
+.progressFill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.3) 50%,
+            transparent 100%);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.progressCritical {
+    background: linear-gradient(90deg, #dc2626, #ef4444);
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+}
+
+.progressLow {
+    background: linear-gradient(90deg, #ea580c, #f97316);
+    box-shadow: 0 0 8px rgba(249, 115, 22, 0.4);
+}
+
+.progressMedium {
+    background: linear-gradient(90deg, #ca8a04, #eab308);
+    box-shadow: 0 0 8px rgba(234, 179, 8, 0.4);
+}
+
+.progressHigh {
+    background: linear-gradient(90deg, #16a34a, #22c55e);
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+}
+
+.progressExcellent {
+    background: linear-gradient(90deg, #059669, #10b981);
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+.progressText {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #94a3b8;
+    min-width: 36px;
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   SYMBOL FOOTER
+   ───────────────────────────────────────────────────────────────────────── */
+
+.symbolFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.25rem;
+}
+
+.status {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.statusActive {
+    color: #10b981;
+}
+
+.statusInactive {
+    color: #64748b;
+}
+
+.removeButton {
+    background: transparent;
+    border: none;
+    padding: 0.375rem;
+    color: #64748b;
+    cursor: pointer;
+    border-radius: 0.375rem;
+    transition: all 0.2s ease;
+}
+
+.removeButton:hover {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   EMPTY STATE
+   ───────────────────────────────────────────────────────────────────────── */
+
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    color: #64748b;
+}
+
+.emptyIcon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #475569;
+}
+
+.empty p {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.empty span {
+    font-size: 0.875rem;
+    color: #475569;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   MORE INDICATOR
+   ───────────────────────────────────────────────────────────────────────── */
+
+.moreIndicator {
+    text-align: center;
+    padding: 0.75rem;
+    font-size: 0.875rem;
+    color: #3b82f6;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 0.5rem;
+    border: 1px dashed rgba(59, 130, 246, 0.3);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   STATS
+   ───────────────────────────────────────────────────────────────────────── */
+
+.stats {
+    display: flex;
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.stat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+    background: rgba(17, 24, 39, 0.5);
+    border-radius: 0.5rem;
+}
+
+.statValue {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #f1f5f9;
+}
+
+.statLabel {
+    font-size: 0.6875rem;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.statLong {
+    color: #10b981;
+}
+
+.statShort {
+    color: #ef4444;
+}
+
+.statWait {
+    color: #f59e0b;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   RESPONSIVE
+   ───────────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stats {
+        flex-wrap: wrap;
+    }
+
+    .stat {
+        min-width: calc(50% - 0.25rem);
+    }
+}

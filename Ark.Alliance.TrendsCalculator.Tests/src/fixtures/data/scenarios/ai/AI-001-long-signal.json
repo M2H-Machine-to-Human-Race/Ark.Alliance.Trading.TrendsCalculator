@@ -1,0 +1,119 @@
+{
+    "id": "AI-001",
+    "name": "AI Prompt - LONG Signal (Strong Uptrend)",
+    "category": "ai",
+    "component": "AIPromptTemplates",
+    "description": "Test AI prompt generation for strong uptrend with buy pressure",
+    "mathDocReference": "Docs/Gemini3usage_TrendsCalculator.md",
+    "input": {
+        "symbol": "BTCUSDT",
+        "lastPrice": 87830.00,
+        "imbalance": 0.28,
+        "volatilityScore": 12.5,
+        "klines": [
+            {
+                "open": 87700,
+                "high": 87750,
+                "low": 87680,
+                "close": 87740,
+                "volume": 150
+            },
+            {
+                "open": 87740,
+                "high": 87790,
+                "low": 87720,
+                "close": 87785,
+                "volume": 180
+            },
+            {
+                "open": 87785,
+                "high": 87840,
+                "low": 87770,
+                "close": 87810,
+                "volume": 200
+            },
+            {
+                "open": 87810,
+                "high": 87860,
+                "low": 87800,
+                "close": 87825,
+                "volume": 165
+            },
+            {
+                "open": 87825,
+                "high": 87870,
+                "low": 87810,
+                "close": 87830,
+                "volume": 175
+            },
+            {
+                "open": 87830,
+                "high": 87880,
+                "low": 87820,
+                "close": 87850,
+                "volume": 190
+            },
+            {
+                "open": 87850,
+                "high": 87900,
+                "low": 87840,
+                "close": 87870,
+                "volume": 210
+            },
+            {
+                "open": 87870,
+                "high": 87920,
+                "low": 87860,
+                "close": 87890,
+                "volume": 195
+            },
+            {
+                "open": 87890,
+                "high": 87940,
+                "low": 87880,
+                "close": 87910,
+                "volume": 185
+            },
+            {
+                "open": 87910,
+                "high": 87960,
+                "low": 87900,
+                "close": 87830,
+                "volume": 170
+            }
+        ],
+        "strategyParams": {
+            "investment": 100,
+            "sigma": 0.003,
+            "takeProfitPnlClick": 0.0015,
+            "riskTolerance": "MEDIUM"
+        }
+    },
+    "expectedResults": {
+        "promptContains": [
+            "BTCUSDT",
+            "Order Book Imbalance",
+            "ATR",
+            "LONG",
+            "SHORT",
+            "WAIT"
+        ],
+        "atrMin": 30,
+        "atrMax": 80,
+        "avgBodyMin": 25,
+        "avgBodyMax": 60,
+        "recommendedSigmaMin": 0.002,
+        "recommendedSigmaMax": 0.01,
+        "recommendedTakeProfitMin": 0.001,
+        "recommendedTakeProfitMax": 0.005,
+        "expectedTendance": "LONG",
+        "minConfidence": 0.6
+    },
+    "tags": [
+        "ai",
+        "prompt",
+        "trending",
+        "long"
+    ],
+    "notes": "Simulates strong uptrend with positive order book imbalance. Should recommend LONG with high confidence."
+}

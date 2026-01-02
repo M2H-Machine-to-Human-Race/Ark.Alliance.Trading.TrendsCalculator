@@ -1,0 +1,449 @@
+/**
+ * TrendCalculationsPage Styles
+ * 
+ * Comprehensive data table styling with sortable headers,
+ * confidence visualization, and filter controls.
+ */
+
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem 2rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LOADING STATE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    gap: 1rem;
+    color: var(--ark-text-muted);
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(59, 130, 246, 0.2);
+    border-top-color: var(--ark-accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--ark-border-subtle);
+}
+
+.headerContent {
+    flex: 1;
+}
+
+.title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--ark-text-primary);
+    margin: 0 0 0.25rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.titleIcon {
+    color: var(--ark-accent);
+}
+
+.subtitle {
+    color: var(--ark-text-muted);
+    margin: 0;
+    font-size: 0.9375rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   STATS GRID
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.statValue {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--ark-text-primary);
+    margin-top: 0.5rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FILTERS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.filtersRow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.filterGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+}
+
+.filterGroup label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ark-text-muted);
+}
+
+.filterInput,
+.filterSelect {
+    padding: 0.625rem 0.875rem;
+    background: rgba(17, 24, 39, 0.8);
+    border: 1px solid var(--ark-border);
+    border-radius: var(--radius-md);
+    color: var(--ark-text-primary);
+    font-size: 0.875rem;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.filterInput:focus,
+.filterSelect:focus {
+    border-color: var(--ark-accent);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.15);
+}
+
+.filterInput::placeholder {
+    color: var(--ark-text-dim);
+}
+
+.filterSelect {
+    cursor: pointer;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TABLE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.tableWrapper {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table thead th {
+    padding: 0.875rem 1rem;
+    text-align: left;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ark-text-muted);
+    background: rgba(17, 24, 39, 0.5);
+    border-bottom: 1px solid var(--ark-border);
+    white-space: nowrap;
+}
+
+.table thead th:first-child {
+    border-radius: var(--radius-md) 0 0 0;
+}
+
+.table thead th:last-child {
+    border-radius: 0 var(--radius-md) 0 0;
+}
+
+.sortable {
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s ease;
+}
+
+.sortable:hover {
+    color: var(--ark-primary-light);
+}
+
+.sortIcon {
+    margin-left: 0.5rem;
+    font-size: 0.625rem;
+}
+
+.table tbody tr {
+    transition: background 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background: rgba(59, 130, 246, 0.04);
+}
+
+.table tbody td {
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid var(--ark-border-subtle);
+    color: var(--ark-text-secondary);
+    font-size: 0.875rem;
+}
+
+.symbolCell {
+    font-weight: 600;
+    color: var(--ark-text-primary);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DIRECTION BADGES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.direction {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.25rem 0.625rem;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.directionLONG {
+    color: var(--ark-long);
+    background: rgba(16, 185, 129, 0.12);
+}
+
+.directionSHORT {
+    color: var(--ark-short);
+    background: rgba(239, 68, 68, 0.12);
+}
+
+.directionWAIT {
+    color: var(--ark-wait);
+    background: rgba(245, 158, 11, 0.12);
+}
+
+.pending {
+    color: var(--ark-text-dim);
+    font-style: italic;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CONFIDENCE VISUALIZATION
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.confidenceCell {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 140px;
+}
+
+.confidenceBar {
+    flex: 1;
+    height: 8px;
+    background: rgba(17, 24, 39, 0.9);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.confidenceFill {
+    height: 100%;
+    border-radius: var(--radius-full);
+    transition: width 0.3s ease;
+}
+
+.confidenceValue {
+    min-width: 40px;
+    text-align: right;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8125rem;
+}
+
+/* Confidence color variants */
+.confidenceExcellent {
+    background: linear-gradient(90deg, #059669, #10b981);
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+.confidenceHigh {
+    background: linear-gradient(90deg, #16a34a, #22c55e);
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+}
+
+.confidenceMedium {
+    background: linear-gradient(90deg, #ca8a04, #eab308);
+    box-shadow: 0 0 8px rgba(234, 179, 8, 0.4);
+}
+
+.confidenceLow {
+    background: linear-gradient(90deg, #ea580c, #f97316);
+    box-shadow: 0 0 8px rgba(249, 115, 22, 0.4);
+}
+
+.confidenceCritical {
+    background: linear-gradient(90deg, #dc2626, #ef4444);
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MATCH STATUS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.matchCorrect {
+    color: var(--ark-success);
+    font-size: 1.125rem;
+}
+
+.matchIncorrect {
+    color: var(--ark-error);
+    font-size: 1.125rem;
+}
+
+.matchPending {
+    color: var(--ark-text-dim);
+}
+
+.timestampCell {
+    font-size: 0.8125rem;
+    color: var(--ark-text-muted);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   EMPTY STATE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    color: var(--ark-text-muted);
+}
+
+.emptyIcon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--ark-text-dim);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LEGEND
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.legend {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    margin-top: 1rem;
+    background: var(--ark-bg-surface);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--ark-border-subtle);
+    flex-wrap: wrap;
+}
+
+.legendTitle {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--ark-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.legendItems {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.legendItem {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.625rem;
+    border-radius: var(--radius-sm);
+}
+
+.legendItem.confidenceExcellent {
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.legendItem.confidenceHigh {
+    color: #22c55e;
+    background: rgba(34, 197, 94, 0.1);
+}
+
+.legendItem.confidenceMedium {
+    color: #eab308;
+    background: rgba(234, 179, 8, 0.1);
+}
+
+.legendItem.confidenceLow {
+    color: #f97316;
+    background: rgba(249, 115, 22, 0.1);
+}
+
+.legendItem.confidenceCritical {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+    .statsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .statsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .legend {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .legendItems {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}

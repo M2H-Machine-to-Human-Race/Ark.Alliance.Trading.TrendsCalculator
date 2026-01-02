@@ -1,0 +1,27 @@
+{
+    "id": "METRICS-006",
+    "name": "Low Win Rate",
+    "description": "Frequent losses with only 35% win rate",
+    "category": "metrics",
+    "tradeCount": 100,
+    "generator": "generateLowWinRate",
+    "expected": {
+        "winRate": {
+            "min": 0.30,
+            "max": 0.40
+        },
+        "avgWin": {
+            "min": 7.0,
+            "max": 9.0
+        },
+        "avgLoss": {
+            "min": 1.5,
+            "max": 2.5
+        }
+    },
+    "assertions": [
+        "Win rate should be low (30-40%)",
+        "Large average win compensates for frequency",
+        "Small frequent losses"
+    ]
+}

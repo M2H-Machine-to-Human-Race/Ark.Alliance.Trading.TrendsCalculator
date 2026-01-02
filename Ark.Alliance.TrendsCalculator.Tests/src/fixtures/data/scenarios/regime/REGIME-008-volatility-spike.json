@@ -1,0 +1,31 @@
+{
+    "id": "REGIME-008",
+    "name": "Volatility Spike",
+    "description": "Sudden volatility explosion after calm period",
+    "category": "regime",
+    "dataPoints": 200,
+    "generator": "generateVolatilitySpike",
+    "expected": {
+        "regime": "VOLATILITY_SPIKE",
+        "volatilityLevel": "EXTREME",
+        "spikeDetected": true,
+        "spikeLocation": {
+            "min": 100,
+            "max": 160
+        },
+        "preSpike Volatility": {
+            "min": 0.0,
+            "max": 0.3
+        },
+        "spikeVolatility": {
+            "min": 3.0,
+            "max": 10.0
+        }
+    },
+    "assertions": [
+        "Volatility spike should be detected",
+        "Spike location should be in expected range",
+        "Pre-spike volatility should be low",
+        "Spike volatility should be extreme"
+    ]
+}

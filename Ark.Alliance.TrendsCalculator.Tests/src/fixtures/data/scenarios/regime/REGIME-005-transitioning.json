@@ -1,0 +1,25 @@
+{
+    "id": "REGIME-005",
+    "name": "Transitioning Regime",
+    "description": "Market transitioning from trending to mean-reverting behavior",
+    "category": "regime",
+    "dataPoints": 200,
+    "generator": "generateTransitioningRegime",
+    "expected": {
+        "regime": "TRANSITIONING",
+        "volatilityLevel": "MODERATE",
+        "regimeChangeDetected": true,
+        "firstHalfRegime": "TRENDING",
+        "secondHalfRegime": "MEAN_REVERTING",
+        "transitionPoint": {
+            "min": 80,
+            "max": 120
+        }
+    },
+    "assertions": [
+        "Regime change should be detected",
+        "First half should show trending characteristics",
+        "Second half should show mean-reverting characteristics",
+        "Transition point should be around midpoint"
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "id": "EMA-001",
+    "name": "EMA Calculation - Period 10",
+    "category": "indicators",
+    "component": "EMAHelper",
+    "description": "Verify EMA calculation with period 10 matches expected values",
+    "mathDocReference": "Technical Analysis - EMA Formula",
+    "input": {
+        "prices": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115
+        ],
+        "period": 10
+    },
+    "expectedResults": {
+        "finalEMAMin": 110,
+        "finalEMAMax": 113,
+        "seriesLength": 7
+    },
+    "tags": [
+        "unit",
+        "ema",
+        "indicators"
+    ],
+    "notes": "EMA with k=2/(10+1)=0.1818. First value is SMA of first 10 prices."
+}

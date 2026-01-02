@@ -1,0 +1,23 @@
+{
+    "id": "METRICS-004",
+    "name": "Small Maximum Drawdown",
+    "description": "Well-controlled risk with minimal drawdown",
+    "category": "metrics",
+    "tradeCount": 100,
+    "generator": "generateSmallDrawdown",
+    "expected": {
+        "maxDrawdown": {
+            "min": 0,
+            "max": 5
+        },
+        "consecutiveLosses": {
+            "min": 0,
+            "max": 3
+        }
+    },
+    "assertions": [
+        "Maximum drawdown should be minimal (<5%)",
+        "Few consecutive losses",
+        "Quick recovery"
+    ]
+}

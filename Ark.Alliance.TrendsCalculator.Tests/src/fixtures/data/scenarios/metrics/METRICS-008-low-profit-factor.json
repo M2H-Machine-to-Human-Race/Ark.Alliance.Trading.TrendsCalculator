@@ -1,0 +1,24 @@
+{
+    "id": "METRICS-008",
+    "name": "Low Profit Factor",
+    "description": "Gross loss nearly equals or exceeds gross profit",
+    "category": "metrics",
+    "tradeCount": 100,
+    "generator": "generateLowProfitFactor",
+    "expected": {
+        "profitFactor": {
+            "min": 0.1,
+            "max": 0.5
+        },
+        "netProfit": {
+            "min": -100,
+            "max": 10
+        }
+    },
+    "assertions": [
+        "Profit factor should be low (<0.5)",
+        "Small wins vs large losses",
+        "Poor risk-reward ratio",
+        "Net profit minimal or negative"
+    ]
+}

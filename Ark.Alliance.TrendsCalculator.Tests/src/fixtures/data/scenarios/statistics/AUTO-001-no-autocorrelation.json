@@ -1,0 +1,45 @@
+{
+    "id": "AUTO-001",
+    "name": "Autocorrelation Test - Negative Autocorrelation",
+    "category": "statistics",
+    "component": "AutocorrelationHelper",
+    "description": "Verify Durbin-Watson > 3.0 for severe negative autocorrelation",
+    "mathDocReference": "Docs/Math/Autocorrelation_Testing.md",
+    "input": {
+        "residuals": [
+            0.5,
+            -0.3,
+            0.8,
+            -0.2,
+            0.1,
+            0.4,
+            -0.6,
+            0.2,
+            -0.1,
+            0.3,
+            -0.4,
+            0.7,
+            -0.5,
+            0.2,
+            0.1,
+            -0.3,
+            0.6,
+            -0.2,
+            0.4,
+            -0.1
+        ]
+    },
+    "expectedResults": {
+        "durbinWatsonRange": [
+            3.0,
+            4.0
+        ],
+        "hasAutocorrelation": true,
+        "severity": "SEVERE"
+    },
+    "tags": [
+        "unit",
+        "autocorrelation"
+    ],
+    "notes": "Strong alternating pattern. DW > 3.0 = SEVERE negative autocorrelation."
+}

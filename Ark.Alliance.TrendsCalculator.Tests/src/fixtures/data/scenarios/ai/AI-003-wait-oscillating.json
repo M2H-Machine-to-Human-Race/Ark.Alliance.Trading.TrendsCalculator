@@ -1,0 +1,116 @@
+{
+    "id": "AI-003",
+    "name": "AI Prompt - WAIT Signal (Oscillating Market)",
+    "category": "ai",
+    "component": "AIPromptTemplates",
+    "description": "Test AI prompt generation for range-bound oscillating market",
+    "mathDocReference": "Docs/Gemini3usage_TrendsCalculator.md",
+    "input": {
+        "symbol": "BNBUSDT",
+        "lastPrice": 312.50,
+        "imbalance": 0.05,
+        "volatilityScore": 8.3,
+        "klines": [
+            {
+                "open": 312.0,
+                "high": 313.5,
+                "low": 311.5,
+                "close": 312.5,
+                "volume": 80
+            },
+            {
+                "open": 312.5,
+                "high": 313.8,
+                "low": 311.8,
+                "close": 313.2,
+                "volume": 85
+            },
+            {
+                "open": 313.2,
+                "high": 314.0,
+                "low": 312.0,
+                "close": 312.3,
+                "volume": 90
+            },
+            {
+                "open": 312.3,
+                "high": 313.5,
+                "low": 311.5,
+                "close": 312.9,
+                "volume": 75
+            },
+            {
+                "open": 312.9,
+                "high": 314.2,
+                "low": 312.2,
+                "close": 312.4,
+                "volume": 95
+            },
+            {
+                "open": 312.4,
+                "high": 313.8,
+                "low": 311.9,
+                "close": 313.0,
+                "volume": 88
+            },
+            {
+                "open": 313.0,
+                "high": 314.0,
+                "low": 312.0,
+                "close": 312.1,
+                "volume": 92
+            },
+            {
+                "open": 312.1,
+                "high": 313.5,
+                "low": 311.5,
+                "close": 312.8,
+                "volume": 78
+            },
+            {
+                "open": 312.8,
+                "high": 314.0,
+                "low": 312.0,
+                "close": 312.2,
+                "volume": 82
+            },
+            {
+                "open": 312.2,
+                "high": 313.5,
+                "low": 311.5,
+                "close": 312.5,
+                "volume": 86
+            }
+        ],
+        "strategyParams": {
+            "investment": 75,
+            "sigma": 0.0025,
+            "takeProfitPnlClick": 0.0012,
+            "riskTolerance": "LOW"
+        }
+    },
+    "expectedResults": {
+        "promptContains": [
+            "BNBUSDT",
+            "0.05",
+            "WAIT"
+        ],
+        "atrMin": 1.5,
+        "atrMax": 3.0,
+        "avgBodyMin": 0.5,
+        "avgBodyMax": 1.5,
+        "imbalanceRange": [
+            -0.10,
+            0.10
+        ],
+        "expectedTendance": "WAIT",
+        "maxConfidence": 0.5
+    },
+    "tags": [
+        "ai",
+        "prompt",
+        "oscillating",
+        "wait"
+    ],
+    "notes": "Simulates range-bound market with neutral imbalance. AI should return WAIT for retry."
+}

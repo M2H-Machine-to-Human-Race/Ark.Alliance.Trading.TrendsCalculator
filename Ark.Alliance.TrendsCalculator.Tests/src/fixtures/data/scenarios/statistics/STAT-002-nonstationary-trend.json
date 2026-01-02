@@ -1,0 +1,53 @@
+{
+    "id": "STAT-002",
+    "name": "Stationarity Test - Non-Stationary Trend",
+    "category": "statistics",
+    "component": "StationarityHelper",
+    "description": "Verify quickStationarityCheck returns false for strong uptrend (non-stationary)",
+    "mathDocReference": "Docs/Math/Stationarity_ADF_Testing.md",
+    "input": {
+        "prices": [
+            100,
+            102,
+            104,
+            106,
+            108,
+            110,
+            112,
+            114,
+            116,
+            118,
+            120,
+            122,
+            124,
+            126,
+            128,
+            130,
+            132,
+            134,
+            136,
+            138,
+            140,
+            142,
+            144,
+            146,
+            148,
+            150,
+            152,
+            154,
+            156,
+            158
+        ]
+    },
+    "expectedResults": {
+        "isStationary": false,
+        "varianceRatioOutOfRange": true,
+        "recommendation": "USE_DIFFERENCING"
+    },
+    "tags": [
+        "critical",
+        "stationarity",
+        "unit"
+    ],
+    "notes": "Strong linear uptrend. Variance and mean change significantly. Non-stationary."
+}

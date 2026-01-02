@@ -1,0 +1,116 @@
+{
+    "id": "AI-002",
+    "name": "AI Prompt - SHORT Signal (Strong Downtrend)",
+    "category": "ai",
+    "component": "AIPromptTemplates",
+    "description": "Test AI prompt generation for strong downtrend with sell pressure",
+    "mathDocReference": "Docs/Gemini3usage_TrendsCalculator.md",
+    "input": {
+        "symbol": "ETHUSDT",
+        "lastPrice": 2345.00,
+        "imbalance": -0.31,
+        "volatilityScore": 18.2,
+        "klines": [
+            {
+                "open": 2380,
+                "high": 2385,
+                "low": 2365,
+                "close": 2370,
+                "volume": 250
+            },
+            {
+                "open": 2370,
+                "high": 2375,
+                "low": 2355,
+                "close": 2360,
+                "volume": 280
+            },
+            {
+                "open": 2360,
+                "high": 2365,
+                "low": 2345,
+                "close": 2355,
+                "volume": 300
+            },
+            {
+                "open": 2355,
+                "high": 2360,
+                "low": 2340,
+                "close": 2350,
+                "volume": 265
+            },
+            {
+                "open": 2350,
+                "high": 2355,
+                "low": 2335,
+                "close": 2345,
+                "volume": 290
+            },
+            {
+                "open": 2345,
+                "high": 2350,
+                "low": 2330,
+                "close": 2340,
+                "volume": 310
+            },
+            {
+                "open": 2340,
+                "high": 2345,
+                "low": 2325,
+                "close": 2335,
+                "volume": 295
+            },
+            {
+                "open": 2335,
+                "high": 2340,
+                "low": 2320,
+                "close": 2330,
+                "volume": 285
+            },
+            {
+                "open": 2330,
+                "high": 2335,
+                "low": 2315,
+                "close": 2325,
+                "volume": 270
+            },
+            {
+                "open": 2325,
+                "high": 2330,
+                "low": 2310,
+                "close": 2345,
+                "volume": 255
+            }
+        ],
+        "strategyParams": {
+            "investment": 50,
+            "sigma": 0.004,
+            "takeProfitPnlClick": 0.002,
+            "riskTolerance": "HIGH"
+        }
+    },
+    "expectedResults": {
+        "promptContains": [
+            "ETHUSDT",
+            "-0.31",
+            "Last 5 Closes"
+        ],
+        "atrMin": 15,
+        "atrMax": 35,
+        "avgBodyMin": 5,
+        "avgBodyMax": 15,
+        "recommendedSigmaMin": 0.003,
+        "recommendedSigmaMax": 0.015,
+        "recommendedTakeProfitMin": 0.001,
+        "recommendedTakeProfitMax": 0.008,
+        "expectedTendance": "SHORT",
+        "minConfidence": 0.6
+    },
+    "tags": [
+        "ai",
+        "prompt",
+        "trending",
+        "short"
+    ],
+    "notes": "Simulates strong downtrend with negative order book imbalance. Should recommend SHORT with high confidence."
+}

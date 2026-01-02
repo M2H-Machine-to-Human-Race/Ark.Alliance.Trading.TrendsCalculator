@@ -1,0 +1,32 @@
+{
+    "id": "METRICS-001",
+    "name": "High Sharpe Ratio",
+    "description": "Excellent risk-adjusted returns with consistent small wins",
+    "category": "metrics",
+    "tradeCount": 100,
+    "generator": "generateHighSharpe",
+    "expected": {
+        "sharpeRatio": {
+            "min": 2.0,
+            "max": 5.0
+        },
+        "winRate": {
+            "min": 0.80,
+            "max": 0.95
+        },
+        "avgWin": {
+            "min": 1.5,
+            "max": 2.5
+        },
+        "avgLoss": {
+            "min": 0.3,
+            "max": 0.7
+        }
+    },
+    "assertions": [
+        "Sharpe ratio should be >= 2.0 (excellent)",
+        "Win rate should be high (>80%)",
+        "Average win should exceed average loss",
+        "Low volatility of returns"
+    ]
+}

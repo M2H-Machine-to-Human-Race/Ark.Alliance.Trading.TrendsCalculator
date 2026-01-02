@@ -1,0 +1,108 @@
+/* ErrorBoundary Styles */
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(31, 41, 55, 0.95));
+}
+
+.card {
+    max-width: 600px;
+    width: 100%;
+    padding: 3rem;
+    background: rgba(17, 24, 39, 0.8);
+    border: 2px solid rgba(239, 68, 68, 0.3);
+    border-radius: 1rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ef4444;
+    margin: 0 0 1rem 0;
+    text-align: center;
+}
+
+.message {
+    font-size: 1.125rem;
+    color: #e5e7eb;
+    margin: 0 0 2rem 0;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.details {
+    margin: 2rem 0;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 0.5rem;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.details summary {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #9ca3af;
+    cursor: pointer;
+    user-select: none;
+}
+
+.details summary:hover {
+    color: #e5e7eb;
+}
+
+.errorText {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    color: #ef4444;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.button,
+.buttonSecondary {
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+}
+
+.button {
+    background: #ef4444;
+    color: #fff;
+}
+
+.button:hover {
+    background: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+.buttonSecondary {
+    background: rgba(59, 130, 246, 0.1);
+    border: 2px solid rgba(59, 130, 246, 0.3);
+    color: #3b82f6;
+}
+
+.buttonSecondary:hover {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: #3b82f6;
+}

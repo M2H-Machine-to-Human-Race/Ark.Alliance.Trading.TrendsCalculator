@@ -1,0 +1,51 @@
+{
+    "name": "ark.alliance.trendscalculator.ui",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "description": "Trend Analysis Microservice - Dashboard UI",
+    "scripts": {
+        "dev": "npm run kill-port && vite",
+        "kill-port": "powershell -ExecutionPolicy Bypass -File scripts/kill-port.ps1",
+        "build": "tsc && vite build",
+        "preview": "vite preview",
+        "test": "vitest",
+        "lint": "eslint src --ext .ts,.tsx"
+    },
+    "keywords": [
+        "trading",
+        "dashboard",
+        "react",
+        "trend-analysis"
+    ],
+    "author": "Ark.Alliance",
+    "license": "MIT",
+    "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^7.1.0",
+        "@fortawesome/free-solid-svg-icons": "^7.1.0",
+        "@fortawesome/react-fontawesome": "^3.1.1",
+        "@share/trends": "file:../Ark.Alliance.TrendsCalculator.Share",
+        "ark-alliance-react-ui": "^1.1.2",
+        "axios": "^1.6.2",
+        "react": "^19.2.3",
+        "react-dom": "^19.2.3",
+        "react-router-dom": "^6.20.0",
+        "socket.io-client": "^4.7.2",
+        "zod": "^3.22.4"
+    },
+    "devDependencies": {
+        "@tailwindcss/vite": "^4.1.18",
+        "@types/react": "^19.2.5",
+        "@types/react-dom": "^19.2.3",
+        "@typescript-eslint/eslint-plugin": "^6.12.0",
+        "@typescript-eslint/parser": "^6.12.0",
+        "@vitejs/plugin-react": "^4.7.0",
+        "eslint": "^8.54.0",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "sass-embedded": "^1.97.1",
+        "tailwindcss": "^4.1.18",
+        "typescript": "^5.9.3",
+        "vite": "^5.4.21",
+        "vitest": "^1.0.0"
+    }
+}

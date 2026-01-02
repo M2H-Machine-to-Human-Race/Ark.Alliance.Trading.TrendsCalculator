@@ -1,0 +1,32 @@
+{
+    "id": "METRICS-010",
+    "name": "Consistent Returns",
+    "description": "Low variance with predictable steady performance",
+    "category": "metrics",
+    "tradeCount": 100,
+    "generator": "generateConsistentReturns",
+    "expected": {
+        "returnVariance": {
+            "min": 0.0,
+            "max": 0.5
+        },
+        "standardDeviation": {
+            "min": 0.0,
+            "max": 1.0
+        },
+        "consistency": {
+            "min": 0.9,
+            "max": 1.0
+        },
+        "avgReturn": {
+            "min": 1.4,
+            "max": 1.6
+        }
+    },
+    "assertions": [
+        "Very low variance of returns",
+        "Small standard deviation",
+        "High consistency score (>0.9)",
+        "Predictable ~1.5% returns"
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "id": "METRICS-005",
+    "name": "High Win Rate",
+    "description": "Consistent winning with 85% win rate",
+    "category": "metrics",
+    "tradeCount": 100,
+    "generator": "generateHighWinRate",
+    "expected": {
+        "winRate": {
+            "min": 0.80,
+            "max": 0.90
+        },
+        "winningTrades": {
+            "min": 80,
+            "max": 90
+        }
+    },
+    "assertions": [
+        "Win rate should be >= 80%",
+        "Consistent winning pattern",
+        "High success frequency"
+    ]
+}

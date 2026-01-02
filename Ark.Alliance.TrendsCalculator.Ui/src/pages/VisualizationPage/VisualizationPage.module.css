@@ -1,0 +1,213 @@
+/* VisualizationPage Styles */
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.header {
+    margin-bottom: 2rem;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 0.5rem 0;
+}
+
+.subtitle {
+    color: #9ca3af;
+    margin: 0 0 2rem 0;
+}
+
+.symbolSelector {
+    padding: 1rem 0;
+}
+
+.select {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.75rem 1rem;
+    background: rgba(17, 24, 39, 0.7);
+    border: 2px solid rgba(59, 130, 246, 0.3);
+    border-radius: 0.5rem;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.select:hover {
+    border-color: rgba(59, 130, 246, 0.5);
+}
+
+.select:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+.parametersPlaceholder {
+    padding: 2rem;
+    text-align: center;
+    color: #9ca3af;
+}
+
+.note {
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    color: #6b7280;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.header {
+    margin-bottom: 2rem;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 0.5rem 0;
+}
+
+.subtitle {
+    color: #9ca3af;
+    margin: 0;
+}
+
+.placeholder {
+    background: rgba(17, 24, 39, 0.7);
+    border-radius: 1rem;
+    padding: 3rem 2rem;
+    text-align: center;
+    border: 2px dashed rgba(59, 130, 246, 0.3);
+}
+
+.placeholderIcon {
+    color: #60a5fa;
+    margin-bottom: 1.5rem;
+}
+
+.placeholder h2 {
+    color: #60a5fa;
+    margin-bottom: 0.75rem;
+    font-size: 1.75rem;
+}
+
+.placeholder p {
+    color: #9ca3af;
+    margin-bottom: 2rem;
+    font-size: 1.0625rem;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.feature {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: rgba(59, 130, 246, 0.05);
+    border-radius: 0.75rem;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    text-align: left;
+    transition: all 0.2s ease;
+}
+
+.feature:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.4);
+    transform: translateY(-2px);
+}
+
+.featureIcon {
+    color: #3b82f6;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+}
+
+.feature h4 {
+    color: #e5e7eb;
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.feature p {
+    color: #9ca3af;
+    margin: 0;
+    font-size: 0.875rem;
+}
+
+/* Chart Controls */
+.controls {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.controlGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.controlGroup label {
+    color: #9ca3af;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Trend Legend */
+.trendLegend {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem;
+    margin-top: 1rem;
+    background: rgba(17, 24, 39, 0.5);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.trendLegend span {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.latestTrend {
+    margin-left: auto;
+    padding: 0.25rem 0.75rem;
+    background: rgba(59, 130, 246, 0.2);
+    border-radius: 0.25rem;
+    color: #60a5fa;
+    font-weight: 600;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    color: #9ca3af;
+    font-size: 1.125rem;
+}

@@ -1,0 +1,30 @@
+{
+    "id": "REGIME-003",
+    "name": "High Volatility",
+    "description": "Large unpredictable price swings with high uncertainty",
+    "category": "regime",
+    "dataPoints": 200,
+    "generator": "generateHighVolatility",
+    "expected": {
+        "regime": "HIGH_VOLATILITY",
+        "volatilityLevel": "HIGH",
+        "volatilityScore": {
+            "min": 0.7,
+            "max": 1.0
+        },
+        "predictability": {
+            "min": 0.0,
+            "max": 0.3
+        },
+        "standardDeviation": {
+            "min": 2.0,
+            "max": 5.0
+        }
+    },
+    "assertions": [
+        "Regime should be classified as HIGH_VOLATILITY",
+        "Volatility level should be HIGH",
+        "Low predictability score",
+        "High standard deviation of returns"
+    ]
+}

@@ -1,0 +1,1 @@
+export { SymbolsPage } from './SymbolsPage';
