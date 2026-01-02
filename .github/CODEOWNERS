@@ -1,0 +1,29 @@
+# CODEOWNERS file for Ark.Alliance.Trading.TrendsCalculator
+# This file defines who is responsible for code review and approval
+
+# Default owner for all files - requires approval from project owner
+* @Criprtoswiss
+
+# Backend code ownership
+/Ark.Alliance.TrendsCalculator.Backend/ @Criprtoswiss
+
+# Frontend code ownership  
+/Ark.Alliance.TrendsCalculator.Ui/ @Criprtoswiss
+
+# Shared DTOs and Enums
+/Ark.Alliance.TrendsCalculator.Share/ @Criprtoswiss
+
+# Test suite
+/Ark.Alliance.TrendsCalculator.Tests/ @Criprtoswiss
+
+# Documentation
+*.md @Criprtoswiss
+/Docs/ @Criprtoswiss
+
+# CI/CD and GitHub configuration
+/.github/ @Criprtoswiss
+
+# Root configuration files
+/*.json @Criprtoswiss
+/*.yml @Criprtoswiss
+/*.yaml @Criprtoswiss

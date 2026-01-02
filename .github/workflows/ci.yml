@@ -26,12 +26,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-          cache-dependency-path: Ark.Alliance.TrendsCalculator.Share/package-lock.json
       
-      - name: Install dependencies
+      - name: Sync package-lock and install dependencies
         working-directory: Ark.Alliance.TrendsCalculator.Share
-        run: npm ci
+        run: npm install
       
       - name: Build Share project
         working-directory: Ark.Alliance.TrendsCalculator.Share
@@ -43,6 +41,7 @@ jobs:
           name: share-build-${{ matrix.node-version }}
           path: Ark.Alliance.TrendsCalculator.Share/dist/
           retention-days: 7
+
 
   # ============================================================================
   # Build and Test Backend
@@ -64,12 +63,22 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-          cache-dependency-path: Ark.Alliance.TrendsCalculator.Backend/package-lock.json
+      
+      - name: Download Share artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: share-build-${{ matrix.node-version }}
+          path: Ark.Alliance.TrendsCalculator.Share/dist/
       
       - name: Install dependencies
         working-directory: Ark.Alliance.TrendsCalculator.Backend
-        run: npm ci
+        run: npm install --ignore-scripts || npm install --legacy-peer-deps --ignore-scripts
+        continue-on-error: true
+      
+      - name: Install dependencies (fallback)
+        if: failure()
+        working-directory: Ark.Alliance.TrendsCalculator.Backend
+        run: npm install --legacy-peer-deps
       
       - name: Lint backend code
         working-directory: Ark.Alliance.TrendsCalculator.Backend
@@ -106,12 +115,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-          cache-dependency-path: Ark.Alliance.TrendsCalculator.Ui/package-lock.json
+      
+      - name: Download Share artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: share-build-${{ matrix.node-version }}
+          path: Ark.Alliance.TrendsCalculator.Share/dist/
       
       - name: Install dependencies
         working-directory: Ark.Alliance.TrendsCalculator.Ui
-        run: npm ci
+        run: npm install
       
       - name: Lint frontend code
         working-directory: Ark.Alliance.TrendsCalculator.Ui
@@ -163,7 +176,7 @@ jobs:
       - name: Install test dependencies
         if: steps.check-tests.outputs.tests_exist == 'true'
         working-directory: Ark.Alliance.TrendsCalculator.Tests
-        run: npm ci
+        run: npm install
       
       - name: Run tests
         if: steps.check-tests.outputs.tests_exist == 'true'

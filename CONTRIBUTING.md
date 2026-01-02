@@ -44,6 +44,9 @@ This project adheres to a code of conduct that all contributors are expected to 
 # Fork the repository on GitHub, then clone your fork
 git clone https://github.com/YOUR_USERNAME/Ark.Alliance.Trading.TrendsCalculator.git
 cd Ark.Alliance.Trading.TrendsCalculator
+
+# Add upstream remote
+git remote add upstream https://github.com/M2H-Machine-to-Human-Race/Ark.Alliance.Trading.TrendsCalculator.git
 ```
 
 ---
@@ -347,10 +350,21 @@ Then create a pull request on GitHub.
 
 ### 6. Review Process
 
-- Maintainers will review your PR
+- **All PRs require approval** from the project owner (@Criprtoswiss)
+- The repository uses a **CODEOWNERS** file that automatically requests reviews
+- PRs must target the `develop` branch (not `main` directly)
 - Address feedback promptly
-- Keep PR focused and small (< 500 lines if possible)
+- Keep PR focused and small (<500 lines if possible)
 - Be patient and respectful
+
+### 7. Branch Protection Rules
+
+| Branch | Protection |
+|:-------|:-----------|
+| `main` | Protected - No direct pushes, PRs from `develop` only, owner approval required |
+| `develop` | Protected - PRs require owner approval, status checks must pass |
+| `feature/*` | Development branches - Create from `develop`, merge back to `develop` |
+| `fix/*` | Bug fix branches - Create from `develop`, merge back to `develop` |
 
 ---
 
@@ -379,9 +393,17 @@ Then create a pull request on GitHub.
 
 ## 💬 Community
 
-- **Issues**: https://github.com/ArmandRicheletKleinberg/Ark.Alliance.Trading.TrendsCalculator/issues
+- **Repository**: https://github.com/M2H-Machine-to-Human-Race/Ark.Alliance.Trading.TrendsCalculator
+- **Issues**: https://github.com/M2H-Machine-to-Human-Race/Ark.Alliance.Trading.TrendsCalculator/issues
 - **Discussions**: Use GitHub Discussions for questions
 - **Email**: armand@m2h.io for direct contact
+
+### Governance
+
+- **Project Owner**: @Criprtoswiss (Armand Richelet-Kleinberg)
+- **All contributions** require owner approval via CODEOWNERS
+- **New members** must be approved by the project owner
+- **Branch protection** enforced on `main` and `develop` branches
 
 ---
 
