@@ -1,375 +1,240 @@
-# <i class="fa fa-chart-line"></i> Ark Alliance Trends Calculator
+# Ark Alliance Trends Calculator
 
 <div align="center">
 
 [![Build Status](https://github.com/ArmandRicheletKleinberg/Ark.Alliance.Trading.TrendsCalculator/actions/workflows/ci.yml/badge.svg)](https://github.com/ArmandRicheletKleinberg/Ark.Alliance.Trading.TrendsCalculator/actions)
-[![Tests](https://img.shields.io/badge/tests-passing-brightgreen)]()
+[![Tests](https://img.shields.io/badge/tests-98.6%25_passing-brightgreen)]()
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-19.0-61dafb)](https://react.dev/)
 [![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-green)](https://nodejs.org/)
 [![License](https://img.shields.io/badge/license-MIT-blue)](./LICENSE)
 
-**🚀 Production-Ready Real-Time Cryptocurrency Trend Analysis Platform**
+**Production-Ready Real-Time Cryptocurrency Trend Analysis Platform**
 
-*Organization*: M2H.Io Ark.Alliance Ecosystem  
-*Version*: 1.0.0  
-*Last Updated*: 2026-01-02
+*M2H.Io Ark.Alliance Ecosystem* • *Version 1.0.0*
 
-[Quick Start](#-quick-start) • [Backend Docs](./Ark.Alliance.TrendsCalculator.Backend/README.md) • [Frontend Docs](./Ark.Alliance.TrendsCalculator.Ui/README.md) • [Contributing](./CONTRIBUTING.md)
+[Quick Start](#quick-start) • [Documentation](#documentation) • [Contributing](./CONTRIBUTING.md)
 
 </div>
 
 ---
 
-## <i class="fa fa-question-circle"></i> What is This?
+## What is This?
 
-A **production-ready full-stack application** for real-time cryptocurrency trend analysis with AI-powered decision support. Combines advanced mathematical indicators (Hurst Exponent, GARCH, Linear Regression, EMA) with Google Gemini AI to provide actionable trading insights.
+A **full-stack TypeScript platform** combining real-time market data streaming with advanced mathematical analysis (Hurst Exponent, GARCH, Linear Regression, EMA) and AI-powered decision support via Google Gemini.
 
-**Perfect for:**
-- <i class="fa fa-robot"></i> Algorithmic trading systems
-- <i class="fa fa-chart-line"></i> Market analysis platforms
-- <i class="fa fa-graduation-cap"></i> Quantitative finance research
-- <i class="fa fa-briefcase"></i> Trading education tools
+**Use Cases:** Algorithmic trading • Market analysis • Quantitative research • Trading education
 
----
-
-## <i class="fa fa-star"></i> Key Features
-
-| Feature | Description |
-|:--------|:------------|
-| <i class="fa fa-chart-area"></i> **Real-Time Analysis** | Live trend calculation with WebSocket streaming from Binance |
-| <i class="fa fa-brain"></i> **AI Integration** | Google Gemini-powered analysis with confidence scoring |
-| <i class="fa fa-calculator"></i> **Mathematical Engine** | Hurst Exponent, GARCH forecasting, Linear Regression, EMA |
-| <i class="fa fa-broadcast-tower"></i> **WebSocket Streaming** | Real-time price updates and trend recalculation |
-| <i class="fa fa-mobile-alt"></i> **MVVM Architecture** | Clean frontend architecture with ark-alliance-react-ui |
-| <i class="fa fa-graduation-cap"></i> **Training Mode** | Walk-forward validation and backtesting capabilities |
-| <i class="fa fa-chart-line"></i> **Visual Analytics** | Interactive charts with trend overlays and indicators |
-| <i class="fa fa-code"></i> **TypeScript-First** | Full type safety with shared DTOs across stack |
-| <i class="fa fa-shield-alt"></i> **Production-Ready** | Error handling, logging, environment configuration |
-| <i class="fa fa-globe"></i> **Testnet Support** | Binance testnet integration for safe development |
+**Core Capabilities:**
+- Real-time trend calculation with WebSocket streaming from Binance
+- Mathematical indicators: Hurst Exponent, GARCH forecasting, Linear Regression, EMA crossovers
+- AI-powered analysis with confidence scoring (Google Gemini)
+- Walk-forward validation and backtesting capabilities
+- MVVM architecture with ark-alliance-react-ui component library
 
 ---
 
-## <i class="fa fa-sitemap"></i> System Architecture
+## Architecture
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#e1f5ff','primaryTextColor':'#000','primaryBorderColor':'#0288d1','lineColor':'#0288d1','secondaryColor':'#fff4e1','tertiaryColor':'#d4edda','noteBkgColor':'#fff9c4','noteTextColor':'#000'}}}%%
-graph TB
-    subgraph Frontend["<b>Frontend Layer</b>"]
-        UI["React UI\n(Vite + TypeScript)"]
-        MVVM["MVVM Pattern\n(Model-ViewModel-View)"]
-        UILib["ark-alliance-react-ui\n(Component Library)"]
-    end
+%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#e1f5ff','primaryTextColor':'#000','primaryBorderColor':'#0288d1'}}}%%
+graph LR
+    UI[React UI<br/>Vite + TypeScript]
+    API[Express REST API<br/>WebSocket Server]
+    Domain[Mathematical Engine<br/>Trend Calculator]
+    Ext1[Binance Futures]
+    Ext2[Google Gemini AI]
+    Share[Shared DTOs & Enums]
     
-    subgraph Backend["<b>Backend Layer</b>"]
-        REST["REST API\n(Express)"]
-        WS["WebSocket Server\n(Socket.IO)"]
-        Services["Business Services"]
-    end
+    UI -->|HTTP/WS| API
+    API --> Domain
+    Domain --> Ext1
+    Domain --> Ext2
+    UI -.uses.-> Share
+    API -.uses.-> Share
     
-    subgraph Domain["<b>Domain Layer</b>"]
-        TrendEngine["Trend Calculator"]
-        MathEngine["Mathematical Indicators"]
-        AIService["AI Analysis"]
-    end
-    
-    subgraph Share["<b>Shared Layer</b>"]
-        DTOs["DTOs & Enums\n(TypeScript)"]
-        Constants["Constants"]
-    end
-    
-    subgraph External["<b>External Systems</b>"]
-        Binance["Binance Futures API"]
-        Gemini["Google Gemini AI"]
-    end
-    
-    UI --> REST
-    UI --> WS
-    UI --> UILib
-    MVVM -.uses.-> DTOs
-    REST --> Services
-    WS --> Services
-    Services --> TrendEngine
-    Services --> AIService
-    TrendEngine --> MathEngine
-    MathEngine --> Binance
-    AIService --> Gemini
-    Services -.uses.-> DTOs
-    
-    style UI fill:#e1f5ff,stroke:#0288d1,stroke-width:2px,color:#000
-    style MVVM fill:#e1f5ff,stroke:#0288d1,stroke-width:2px,color:#000
-    style UILib fill:#e1f5ff,stroke:#0288d1,stroke-width:2px,color:#000
-    style REST fill:#d4edda,stroke:#388e3c,stroke-width:2px,color:#000
-    style WS fill:#d4edda,stroke:#388e3c,stroke-width:2px,color:#000
-    style Services fill:#d4edda,stroke:#388e3c,stroke-width:2px,color:#000
-    style TrendEngine fill:#fff4e1,stroke:#f57c00,stroke-width:2px,color:#000
-    style MathEngine fill:#fff4e1,stroke:#f57c00,stroke-width:2px,color:#000
-    style AIService fill:#fff4e1,stroke:#f57c00,stroke-width:2px,color:#000
-    style DTOs fill:#ffeaa7,stroke:#f57c00,stroke-width:2px,color:#000
-    style Constants fill:#ffeaa7,stroke:#f57c00,stroke-width:2px,color:#000
-    style Binance fill:#ffccbc,stroke:#d84315,stroke-width:2px,color:#000
-    style Gemini fill:#ffccbc,stroke:#d84315,stroke-width:2px,color:#000
-    style Frontend fill:#f0f8ff,stroke:#0288d1,stroke-width:3px
-    style Backend fill:#f1f8f4,stroke:#388e3c,stroke-width:3px
-    style Domain fill:#fffbf0,stroke:#f57c00,stroke-width:3px
-    style Share fill:#fff9e6,stroke:#f57c00,stroke-width:3px
-    style External fill:#fff3e0,stroke:#d84315,stroke-width:3px
+    style UI fill:#e1f5ff,stroke:#0288d1,stroke-width:2px
+    style API fill:#d4edda,stroke:#388e3c,stroke-width:2px
+   style Domain fill:#fff4e1,stroke:#f57c00,stroke-width:2px
+    style Share fill:#ffeaa7,stroke:#f57c00,stroke-width:2px
+    style Ext1 fill:#ffccbc,stroke:#d84315,stroke-width:2px
+    style Ext2 fill:#ffccbc,stroke:#d84315,stroke-width:2px
 ```
+
+**Layered Architecture:**
+- **[Frontend](./Ark.Alliance.TrendsCalculator.Ui/README.md)**: React 19 with MVVM pattern
+- **[Backend](./Ark.Alliance.TrendsCalculator.Backend/README.md)**: Node.js/Express with real-time WebSocket
+- **[Share](./Ark.Alliance.TrendsCalculator.Share/README.md)**: TypeScript DTOs, enums, constants
+- **[Tests](./Ark.Alliance.TrendsCalculator.Tests/README.md)**: Vitest with 148 test cases (98.6% passing)
 
 ---
 
-## <i class="fa fa-rocket"></i> Quick Start
+## Quick Start
 
 ### Prerequisites
-
 - Node.js >= 18.0.0
 - npm >= 8.0.0
-- Binance account (optional, for live data)
-- Google Gemini API key (optional, for AI features)
+- (Optional) Binance account for live data
+- (Optional) Google Gemini API key for AI features
 
 ### Installation
 
 ```bash
-# Clone the repository
+# Clone and navigate
 git clone https://github.com/ArmandRicheletKleinberg/Ark.Alliance.Trading.TrendsCalculator.git
 cd Ark.Alliance.Trading.TrendsCalculator
 
-# Install and build Share (DTOs & Enums) first
+# Install and build Share library (required first)
 cd Ark.Alliance.TrendsCalculator.Share
-npm install
-npm run build
+npm install && npm run build
 
-# Install and start Backend
+# Start Backend
 cd ../Ark.Alliance.TrendsCalculator.Backend
 npm install
-cp .env.example .env
-# Edit .env with your configuration
-npm run dev
+cp .env.example .env  # Configure your environment
+npm run dev           # Runs on port 3001
 
-# Install and start Frontend (in a new terminal)
+# Start Frontend (new terminal)
 cd ../Ark.Alliance.TrendsCalculator.Ui
 npm install
-npm run dev
+npm run dev           # Runs on port 5173
 ```
 
 ### Configuration
 
-Edit `Ark.Alliance.TrendsCalculator.Backend/.env`:
-
+Edit `Backend/.env`:
 ```env
-# Server Configuration
+# Server
 PORT=3001
 NODE_ENV=development
 
-# Binance Configuration (use testnet for development)
-BINANCE_API_KEY=your_binance_api_key
-BINANCE_SECRET_KEY=your_binance_secret
+# Binance (use testnet for development)
 BINANCE_USE_TESTNET=true
+BINANCE_API_KEY=your_key
+BINANCE_SECRET_KEY=your_secret
 
-# Google Gemini AI (optional)
-GEMINI_API_KEY=your_gemini_api_key
+# AI (optional)
+GEMINI_API_KEY=your_gemini_key
 
-# Trend Calculation Settings
+# Analysis
 DEFAULT_BUFFER_SIZE=200
 MIN_BUFFER_SIZE=50
 ```
 
-### Access the Application
-
+### Access
 - **Frontend**: http://localhost:5173
 - **Backend API**: http://localhost:3001
-- **WebSocket**: ws://localhost:3001
+- **API Docs**: See [Backend README](./Ark.Alliance.TrendsCalculator.Backend/README.md#api-endpoints)
 
 ---
 
-## <i class="fa fa-cogs"></i> Tech Stack
+## Documentation
 
-### Frontend
-- **Framework**: React 19.0 with Vite
-- **Language**: TypeScript 5.6
-- **UI Library**: ark-alliance-react-ui (custom MVVM components)
-- **State Management**: React Context API
-- **Real-Time**: Socket.IO Client
-- **Styling**: CSS Modules
-- **Build**: Vite with HMR
+| Document | Description |
+|:---------|:------------|
+| **[Backend API](./Ark.Alliance.TrendsCalculator.Backend/README.md)** | REST endpoints, WebSocket events, services, mathematical helpers |
+| **[Frontend UI](./Ark.Alliance.TrendsCalculator.Ui/README.md)** | MVVM components, pages, contexts, real-time integration |
+| **[Shared DTOs](./Ark.Alliance.TrendsCalculator.Share/README.md)** | TypeScript interfaces, enums, validation schemas, constants | 
+| **[Tests](./Ark.Alliance.TrendsCalculator.Tests/README.md)** | Test architecture, scenarios, integration tests, coverage |
+| **[Contributing](./CONTRIBUTING.md)** | Development setup, coding standards, PR process |
 
-### Backend
-- **Runtime**: Node.js 18+
-- **Framework**: Express.js
-- **Language**: TypeScript 5.6
-- **Real-Time**: Socket.IO Server
-- **External APIs**: Binance Futures, Google Gemini
-- **Provider Library**: ark-alliance-trading-providers-lib
-
-### Mathematical Engine
-- **Indicators**:
-  - Hurst Exponent (market persistence analysis)
-  - GARCH (volatility forecasting)
-  - Linear Regression (trend slope calculation)
-  - EMA (Exponential Moving Averages)
-  - Walk-Forward Validation
-
-### Shared
-- **DTOs**: Zod-validated TypeScript interfaces
-- **Enums**: Centralized enumerations
-- **Constants**: Application-wide constants
+**Mathematical Indicators:**
+- **Hurst Exponent**: Market persistence analysis (H < 0.5: mean-reverting, H > 0.5: trending)
+- **GARCH**: Volatility forecasting with conditional heteroskedasticity
+- **Linear Regression**: Trend slope calculation with R² confidence
+- **EMA Crossover**: Short-term (50) vs long-term (200) trend signals
 
 ---
 
-## <i class="fa fa-folder-tree"></i> Project Structure
+## Tech Stack
+
+| Layer | Technologies |
+|:------|:-------------|
+| Frontend | React 19, TypeScript 5.6, Vite, Socket.IO Client, ark-alliance-react-ui |
+| Backend | Node.js 18+, Express, TypeScript 5.6, Socket.IO Server, ark-alliance-trading-providers-lib |
+| Shared | TypeScript, Zod validation |
+| Testing | Vitest, 148 test cases, 98.6% pass rate |
+| External | Binance Futures API, Google Gemini AI |
+
+---
+
+## Project Structure
 
 ```
 Ark.Alliance.Trading.TrendsCalculator/
-├── Ark.Alliance.TrendsCalculator.Backend/    # Node.js REST API + WebSocket
+├── Ark.Alliance.TrendsCalculator.Backend/    # Node.js API + WebSocket
 │   ├── src/
-│   │   ├── application/services/             # Business logic services
-│   │   ├── domain/services/                  # Mathematical algorithms
-│   │   ├── infrastructure/                   # External integrations
-│   │   └── presentation/api/                 # Controllers & routes
-│   └── README.md                             # 📚 BACKEND DOCS
+│   │   ├── api/                              # Controllers, routes, middleware
+│   │   ├── services/                         # Business logic
+│   │   ├── domain/                           # Mathematical algorithms
+│   │   └── infrastructure/                   # External integrations
+│   └── README.md                             # 📚 Backend Documentation
 │
-├── Ark.Alliance.TrendsCalculator.Share/      # Shared DTOs & Enums
+├── Ark.Alliance.TrendsCalculator.Share/      # Shared TypeScript DTOs
 │   ├── src/
 │   │   ├── dto/                              # Data Transfer Objects
 │   │   ├── enums/                            # Enumerations
-│   │   └── Constants.ts                       # Application constants
-│   └── README.md                             # 📚 SHARE DOCS
+│   │   └── Constants.ts                      # Application constants
+│   └── README.md                             # 📚 Share Documentation
 │
 ├── Ark.Alliance.TrendsCalculator.Ui/         # React Frontend
 │   ├── src/
-│   │   ├── components/                       # UI Components (MVVM)
+│   │   ├── components/                       # MVVM UI Components
+│   │   ├── pages/                            # Page components
 │   │   ├── contexts/                         # React Contexts
-│   │   ├── helpers/                          # Utility functions
-│   │   ├── pages/                            # Page components (MVVM)
 │   │   └── services/                         # API clients
-│   └── README.md                             # 📚 FRONTEND DOCS
+│   └── README.md                             # 📚 Frontend Documentation
+│
+├── Ark.Alliance.TrendsCalculator.Tests/      # Vitest Test Suite
+│   ├── src/
+│   │   ├── unit/                             # Unit tests
+│   │   ├── integration/                      # Integration tests
+│   │   └── indicators/                       # Indicator tests
+│   └── README.md                             # 📚 Test Documentation
 │
 ├── .github/workflows/                        # CI/CD pipelines
 ├── CONTRIBUTING.md                           # Contribution guidelines
-├── LICENSE                                   # MIT License
 └── README.md                                 # ⬅️ You are here
 ```
 
 ---
 
-## <i class="fa fa-exchange-alt"></i> Trend Analysis Flow
+## Contributing
 
-```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#e1f5ff','actorBkg':'#e1f5ff','actorBorder':'#0288d1','actorTextColor':'#000','signalColor':'#000','signalTextColor':'#000','labelBoxBkgColor':'#fff4e1','labelBoxBorderColor':'#f57c00','labelTextColor':'#000','loopTextColor':'#000','noteBorderColor':'#388e3c','noteBkgColor':'#fff9c4','noteTextColor':'#000','activationBorderColor':'#0288d1','activationBkgColor':'#bbdefb','sequenceNumberColor':'#fff'}}}%%
-sequenceDiagram
-    autonumber
-    participant User
-    participant UI as React UI
-    participant Backend
-    participant TrendEngine
-    participant Binance
-    participant AI as Gemini AI
-    
-    User->>UI: Add Symbol (e.g., BTCUSDT)
-    UI->>Backend: POST /api/symbol/track
-    Backend->>Binance: Subscribe to Kline Stream
-    Binance-->>Backend: Real-time prices
-    Backend->>Backend: Buffer prices (200 samples)
-    
-    loop Every price update
-        Backend->>TrendEngine: Calculate Trend
-        TrendEngine->>TrendEngine: Linear Regression
-        TrendEngine->>TrendEngine: Hurst Exponent
-        TrendEngine->>TrendEngine: EMA 50/200
-        TrendEngine->>TrendEngine: GARCH Forecast
-        TrendEngine-->>Backend: Trend Analysis
-        Backend->>UI: WebSocket: trend:update
-        UI-->>User: Display Trend + Indicators
-    end
-    
-    User->>UI: Request AI Analysis
-    UI->>Backend: POST /api/ai/analyze
-    Backend->>AI: Analyze with context
-    AI-->>Backend: Decision + Confidence
-    Backend->>UI: WebSocket: ai:analysis
-    UI-->>User: Display AI Insight
-```
-
----
-
-## <i class="fa fa-graduation-cap"></i> Mathematical Indicators
-
-### Hurst Exponent
-Measures market **persistence** vs **mean-reversion**:
-- **H < 0.5**: Mean-reverting (anti-persistent) → Range trading
-- **H ≈ 0.5**: Random walk → Neutral
-- **H > 0.5**: Trending (persistent) → Trend following
-
-### GARCH Forecasting
-Forecasts future **volatility** based on conditional heteroskedasticity:
-- Predicts next-period variance
-- Identifies volatility clustering
-- Risk management insights
-
-### Linear Regression
-Calculates trend **slope** and **strength**:
-- Slope: direction and steepness
-- R²: trend reliability (0-1)
-- Composite score: weighted indicator
-
-### Exponential Moving Averages
-- **EMA 50**: Short-term trend
-- **EMA 200**: Long-term trend  
-- **Crossover**: Bullish/Bearish signals
-
----
-
-## <i class="fa fa-book-open"></i> Documentation
-
-| Document | Description |
-|:---------|:------------|
-| **[<i class="fa fa-server"></i> Backend API](./Ark.Alliance.TrendsCalculator.Backend/README.md)** | REST endpoints, WebSocket events, services architecture |
-| **[<i class="fa fa-desktop"></i> Frontend UI](./Ark.Alliance.TrendsCalculator.Ui/README.md)** | MVVM pattern, components, pages, state management |
-| **[<i class="fa fa-share-alt"></i> Shared DTOs](./Ark.Alliance.TrendsCalculator.Share/README.md)** | Data structures, enums, validation schemas |
-| **[<i class="fa fa-users"></i> Contributing](./CONTRIBUTING.md)** | Coding standards, PR process, development setup |
-| **[<i class="fa fa-file-contract"></i> License](./LICENSE)** | MIT License details |
-
----
-
-## <i class="fa fa-users"></i> Contributing
-
-We welcome contributions! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for:
-- Development setup
+We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md) for:
+- Development setup and prerequisites
 - Coding standards (MVVM, TypeScript, enums)
-- Testing requirements
+- Testing requirements and coverage
 - Pull request process
 
-### Quick Guidelines
-- Follow **MVVM pattern** for frontend components
-- Import all types from **Share project**
-- Use **enums** instead of hardcoded strings
-- Write **JSDoc** with `@author Armand Richelet-Kleinberg`
-- Add **tests** for new features
-- Keep PRs **focused and small**
+**Quick Guidelines:**
+- Follow MVVM pattern for frontend components
+- Import all types from Share project
+- Use enums instead of hardcoded strings
+- Write JSDoc with `@author Armand Richelet-Kleinberg`
+- Add tests for new features (maintain >95% coverage)
 
 ---
 
-## <i class="fa fa-pen"></i> Author
+## License
 
-**Armand Richelet-Kleinberg**  
-M2H.Io Ark.Alliance Ecosystem
-
-*Developed with the assistance of [Claude Sonnet](https://www.anthropic.com/claude) (Anthropic AI)*
-
----
-
-## <i class="fa fa-file-contract"></i> License
-
-MIT License - see [LICENSE](./LICENSE) file for details
+MIT License - see [LICENSE](./LICENSE)
 
 **Copyright © 2025-2026 M2H.Io Ark.Alliance**
 
 ---
 
+## Author
+
+**Armand Richelet-Kleinberg**  
+M2H.Io Ark.Alliance Ecosystem
+
+*Developed with assistance from [Claude Sonnet](https://www.anthropic.com/claude) (Anthropic AI)*
+
+---
+
 <div align="center">
 
-**Built with <i class="fa fa-heart"></i> for the quantitative trading community**
-
-[<i class="fa fa-github"></i> GitHub](https://github.com/ArmandRicheletKleinberg/Ark.Alliance.Trading.TrendsCalculator) • [<i class="fa fa-bug"></i> Issues](https://github.com/ArmandRicheletKleinberg/Ark.Alliance.Trading.TrendsCalculator/issues) • [<i class="fa fa-users"></i> Contributing](./CONTRIBUTING.md)
+**[⭐ Star on GitHub](https://github.com/ArmandRicheletKleinberg/Ark.Alliance.Trading.TrendsCalculator)** • **[🐛 Report Issues](https://github.com/ArmandRicheletKleinberg/Ark.Alliance.Trading.TrendsCalculator/issues)** • **[💬 Contributing](./CONTRIBUTING.md)**
 
 </div>
