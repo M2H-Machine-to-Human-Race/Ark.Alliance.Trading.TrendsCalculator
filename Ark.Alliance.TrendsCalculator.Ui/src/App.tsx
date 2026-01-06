@@ -21,6 +21,7 @@ import { TrendCalculationsPage } from './pages/TrendCalculationsPage/TrendCalcul
 import { VisualizationPage } from './pages/VisualizationPage/VisualizationPage';
 import { ConfigurationPage } from './pages/ConfigurationPage/ConfigurationPage';
 import { TrainingPage } from './pages/TrainingPage/TrainingPage';
+import { AITelemetryPage } from './pages/AITelemetryPage/AITelemetryPage';
 
 function AppContent() {
     const vm = useAppViewModel();
@@ -39,6 +40,7 @@ function AppContent() {
                 <Route path="/visualization" element={<VisualizationPage />} />
                 <Route path="/configuration" element={<ConfigurationPage />} />
                 <Route path="/training" element={<TrainingPage />} />
+                <Route path="/ai-telemetry" element={<AITelemetryPage />} />
                 <Route path="*" element={<OverviewPage />} />
             </Routes>
         </AppLayout>

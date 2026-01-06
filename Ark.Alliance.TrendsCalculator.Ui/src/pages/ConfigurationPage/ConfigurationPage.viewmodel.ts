@@ -5,20 +5,21 @@
  * ViewModel layer for Configuration Page following MVVM pattern.
  * Manages system settings state and save/reset operations.
  * 
- * @author Ark.Alliance
+ * @author Ark.Alliance Team
  * @version 2.0.0
  * @since 2025-12-28
  * 
  * @remarks
  * This ViewModel:
  * - Loads settings from backend API on mount
- * - Manages settings state (AI, calculation, WebSocket)
+ * - Manages settings state (AI, calculation, WebSocket, forecast)
  * - Saves settings to backend via API
  * - Follows MVVM separation: NO UI/DOM logic here
  */
 
 import { useState, useCallback, useEffect } from 'react';
 import { apiService } from '../../services/api';
+import { AIProviderType } from '@share/trends';
 import type { ConfigurationPageModel, SystemSettings } from './ConfigurationPage.model';
 
 /**
@@ -26,7 +27,7 @@ import type { ConfigurationPageModel, SystemSettings } from './ConfigurationPage
  */
 const DEFAULT_SETTINGS: SystemSettings = {
     ai: {
-        provider: 'gemini',
+        provider: AIProviderType.GEMINI,
         model: 'gemini-2.0-flash',
         temperature: 0.7,
         maxTokens: 2048,
@@ -41,6 +42,11 @@ const DEFAULT_SETTINGS: SystemSettings = {
         reconnectionDelay: 1000,
         maxReconnectionAttempts: 5,
         heartbeatInterval: 30000,
+    },
+    forecast: {
+        showHorizon: true,
+        horizonMs: 60000,
+        horizonPresets: [30000, 60000, 300000, 900000],
     },
 };
 
@@ -83,6 +89,20 @@ export function useConfigurationViewModel() {
                             reconnectionDelay: data?.binance?.market_data_ws_reconnect_interval_ms || DEFAULT_SETTINGS.websocket.reconnectionDelay,
                             maxReconnectionAttempts: DEFAULT_SETTINGS.websocket.maxReconnectionAttempts,
                             heartbeatInterval: DEFAULT_SETTINGS.websocket.heartbeatInterval,
+                        },
+                        forecast: {
+                            showHorizon: data?.general?.['forecast.show_horizon'] === 'true' || DEFAULT_SETTINGS.forecast.showHorizon,
+                            horizonMs: parseInt(data?.general?.['forecast.horizon_ms']) || DEFAULT_SETTINGS.forecast.horizonMs,
+                            horizonPresets: (() => {
+                                const presets = data?.general?.['forecast.horizon_presets'];
+                                if (!presets) return DEFAULT_SETTINGS.forecast.horizonPresets;
+                                if (Array.isArray(presets)) return presets;
+                                try {
+                                    return JSON.parse(presets);
+                                } catch {
+                                    return DEFAULT_SETTINGS.forecast.horizonPresets;
+                                }
+                            })(),
                         },
                     },
                 }));
@@ -134,6 +154,22 @@ export function useConfigurationViewModel() {
         }));
     }, []);
 
+    const updateForecastSetting = useCallback(<K extends keyof typeof DEFAULT_SETTINGS.forecast>(
+        key: K,
+        value: typeof DEFAULT_SETTINGS.forecast[K]
+    ) => {
+        setModel((prev) => ({
+            ...prev,
+            settings: {
+                ...prev.settings,
+                forecast: {
+                    ...prev.settings.forecast,
+                    [key]: value,
+                },
+            },
+        }));
+    }, []);
+
     const handleSave = useCallback(async () => {
         setModel((prev) => ({ ...prev, isSaving: true }));
 
@@ -152,6 +188,11 @@ export function useConfigurationViewModel() {
                 },
                 binance: {
                     market_data_ws_reconnect_interval_ms: model.settings.websocket.reconnectionDelay,
+                },
+                general: {
+                    'forecast.show_horizon': String(model.settings.forecast.showHorizon),
+                    'forecast.horizon_ms': String(model.settings.forecast.horizonMs),
+                    'forecast.horizon_presets': JSON.stringify(model.settings.forecast.horizonPresets),
                 },
             };
 
@@ -184,6 +225,7 @@ export function useConfigurationViewModel() {
         updateAISetting,
         updateCalculationSetting,
         updateWebSocketSetting,
+        updateForecastSetting,
         handleSave,
         handleReset,
     };

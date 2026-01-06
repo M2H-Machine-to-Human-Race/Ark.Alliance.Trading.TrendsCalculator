@@ -12,6 +12,7 @@ import { HealthController } from '../controllers/HealthController';
 import { BinanceController } from '../controllers/BinanceController';
 import { SettingsController } from '../controllers/SettingsController';
 import { AIController } from '../controllers/AIController';
+import { createAITelemetryController } from '../controllers/AITelemetryController';
 
 const router = Router();
 
@@ -22,6 +23,7 @@ const healthController = new HealthController();
 const binanceController = new BinanceController();
 const settingsController = new SettingsController();
 const aiController = new AIController();
+const aiTelemetryController = createAITelemetryController();
 
 // Health endpoints
 router.get('/health', (req, res) => healthController.check(req, res));
@@ -56,5 +58,7 @@ router.get('/settings/:category', (req, res) => settingsController.getByCategory
 router.post('/ai/analyze', (req, res) => aiController.analyze(req, res));
 router.get('/ai/status', (req, res) => aiController.getStatus(req, res));
 
-export default router;
+// AI Telemetry endpoints (settings, logs, connection testing, forecast settings)
+aiTelemetryController.registerRoutes(router);
 
+export default router;

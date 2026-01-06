@@ -26,6 +26,8 @@ export * from './ai/AIProviderType';
 export * from './ai/MABias';
 export * from './ai/RiskTolerance';
 export * from './ai/ThinkingLevel';
+export * from './ai/AIExchangeType';
+export * from './ai/AIExchangeStatus';
 
 // Config Enums
 export * from './config/FeaturePresetType';
@@ -42,6 +44,11 @@ export * from './config/RegimeDetectionMethod';
 export * from './config/MarketDataSource';
 export * from './config/BinanceEnvironment';
 export * from './config/SymbolStatus';
+export * from './config/SettingDataType';
+export * from './config/SettingCategory';
+
+// Common Enums (additional)
+export * from './common/LogLevel';
 
 // UI Enums
 export * from './ui/BadgeStatus';

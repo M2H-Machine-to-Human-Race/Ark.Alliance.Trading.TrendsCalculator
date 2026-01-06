@@ -3,16 +3,21 @@
  * @module Data/Entities/SystemSettings
  */
 
-export type SettingDataType = 'string' | 'number' | 'boolean' | 'json';
-export type SettingCategory = 'general' | 'account' | 'cache' | 'ratelimit' | 'logging' | 'strategy' | 'binance' | 'binance_endpoints' | 'ai' | 'ai_prompts' | 'ai_configuration' | 'system' | 'inversion';
-export type LogLevel = 'debug' | 'info' | 'warn' | 'error';
+import { SettingDataType, SettingCategory, LogLevel } from '@share/enums';
+
+// Re-export for backward compatibility
+export { SettingDataType, SettingCategory, LogLevel };
+
+// Type that accepts both enum values and their underlying string representations
+export type SettingDataTypeValue = SettingDataType | 'string' | 'number' | 'boolean' | 'json';
+export type SettingCategoryValue = SettingCategory | 'general' | 'account' | 'cache' | 'ratelimit' | 'logging' | 'strategy' | 'binance' | 'binance_endpoints' | 'ai' | 'ai_prompts' | 'ai_configuration' | 'system' | 'inversion';
 
 export interface SystemSetting {
     key: string;
     value: string;
-    dataType: SettingDataType;
+    dataType: SettingDataTypeValue;
     description?: string;
-    category: SettingCategory;
+    category: SettingCategoryValue;
     createdAt: number;
     updatedAt: number;
 }

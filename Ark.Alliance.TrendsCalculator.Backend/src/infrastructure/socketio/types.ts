@@ -100,6 +100,20 @@ export interface BinancePriceEvent {
 }
 
 /**
+ * AI Exchange event payload for real-time telemetry
+ */
+export interface AIExchangeEvent {
+    id: number;
+    provider: string;
+    status: 'SUCCESS' | 'ERROR' | 'TIMEOUT' | 'PENDING';
+    summary: string;
+    durationMs: number;
+    tokenCount: number;
+    timestampSend: number;
+    timestampReceive?: number;
+}
+
+/**
  * Socket.IO event names
  */
 export const SocketEvents = {
@@ -111,6 +125,7 @@ export const SocketEvents = {
     SYMBOL_UPDATED: 'symbol:updated',
     TRAINING_STATUS: 'training:status',
     AI_ANALYSIS: 'ai:analysis',
+    AI_EXCHANGE: 'ai:exchange',
     HEALTH_UPDATE: 'health:update',
     ERROR: 'error',
 
@@ -135,4 +150,6 @@ export const SocketRooms = {
     SYMBOL: (symbol: string) => `symbol:${symbol}`,
     TRAINING: 'training',
     HEALTH: 'health',
+    AI_TELEMETRY: 'ai:telemetry',
 } as const;
+

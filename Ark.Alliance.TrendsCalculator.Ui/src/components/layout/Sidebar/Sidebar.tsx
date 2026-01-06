@@ -13,7 +13,8 @@ import {
     faChartBar,
     faChartArea,
     faCog,
-    faGraduationCap
+    faGraduationCap,
+    faRobot
 } from '@fortawesome/free-solid-svg-icons';
 import styles from './Sidebar.module.css';
 
@@ -32,6 +33,7 @@ export function Sidebar({ currentPath, onNavigate, collapsed, onToggle }: Sideba
         { path: '/visualization', label: 'Visualization', icon: faChartArea },
         { path: '/configuration', label: 'Configuration', icon: faCog },
         { path: '/training', label: 'Training', icon: faGraduationCap },
+        { path: '/ai-telemetry', label: 'AI Telemetry', icon: faRobot },
     ];
 
     return (

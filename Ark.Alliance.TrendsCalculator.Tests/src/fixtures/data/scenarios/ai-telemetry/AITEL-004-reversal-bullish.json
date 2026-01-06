@@ -1,0 +1,121 @@
+{
+    "id": "AITEL-004",
+    "name": "Reversal Pattern - Bearish to Bullish",
+    "description": "V-shaped reversal pattern: initial downtrend followed by strong uptrend recovery. Expected AI answer: LONG with moderate confidence.",
+    "category": "ai-telemetry",
+    "component": "AITelemetryAccuracy",
+    "generator": "MathematicalTimeSeries",
+    "input": {
+        "symbol": "TESTUSDT",
+        "lastPrice": 101.50,
+        "imbalance": 0.28,
+        "volatilityScore": 22,
+        "strategyParams": {
+            "investment": 100,
+            "sigma": 0.003,
+            "takeProfitPnlClick": 0.0015,
+            "riskTolerance": "MEDIUM"
+        },
+        "klines": [
+            {
+                "open": 100.00,
+                "high": 100.20,
+                "low": 99.00,
+                "close": 99.10,
+                "volume": 1200
+            },
+            {
+                "open": 99.10,
+                "high": 99.30,
+                "low": 98.20,
+                "close": 98.30,
+                "volume": 1400
+            },
+            {
+                "open": 98.30,
+                "high": 98.50,
+                "low": 97.40,
+                "close": 97.50,
+                "volume": 1600
+            },
+            {
+                "open": 97.50,
+                "high": 97.70,
+                "low": 96.80,
+                "close": 97.00,
+                "volume": 1800
+            },
+            {
+                "open": 97.00,
+                "high": 97.20,
+                "low": 96.50,
+                "close": 96.70,
+                "volume": 2000
+            },
+            {
+                "open": 96.70,
+                "high": 97.80,
+                "low": 96.50,
+                "close": 97.60,
+                "volume": 2200
+            },
+            {
+                "open": 97.60,
+                "high": 98.80,
+                "low": 97.40,
+                "close": 98.70,
+                "volume": 2000
+            },
+            {
+                "open": 98.70,
+                "high": 99.90,
+                "low": 98.50,
+                "close": 99.80,
+                "volume": 1800
+            },
+            {
+                "open": 99.80,
+                "high": 100.90,
+                "low": 99.60,
+                "close": 100.80,
+                "volume": 1600
+            },
+            {
+                "open": 100.80,
+                "high": 101.70,
+                "low": 100.60,
+                "close": 101.50,
+                "volume": 1500
+            }
+        ],
+        "mathematicalAnalysis": {
+            "priceChange": 1.50,
+            "priceChangePercent": 1.50,
+            "reversalPoint": 5,
+            "downtrendSlope": -0.66,
+            "uptrendSlope": 0.96,
+            "volumeSpike": true,
+            "vShapeConfirmation": true
+        }
+    },
+    "expectedResults": {
+        "tendance": "LONG",
+        "confidenceMin": 0.55,
+        "confidenceMax": 0.85,
+        "sigmaMin": 0.002,
+        "sigmaMax": 0.015,
+        "takeProfitPnlClickMin": 0.001,
+        "takeProfitPnlClickMax": 0.008,
+        "reasoningMustContain": [
+            "reversal",
+            "recovery",
+            "bounce",
+            "momentum"
+        ]
+    },
+    "assertions": [
+        "AI should return LONG for bullish reversal",
+        "Confidence should be moderate (0.55-0.85) due to recent volatility",
+        "Reasoning should mention reversal or recovery pattern"
+    ]
+}

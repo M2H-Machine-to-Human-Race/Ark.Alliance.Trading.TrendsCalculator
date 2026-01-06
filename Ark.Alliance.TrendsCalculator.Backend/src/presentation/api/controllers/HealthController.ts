@@ -17,8 +17,9 @@ export class HealthController {
             success: true,
             data: {
                 status: 'healthy',
+                service: 'Ark.Alliance.TrendsCalculator.Backend',
                 uptime: process.uptime(),
-                timestamp: Date.now(),
+                timestamp: new Date().toISOString(),
                 version: '1.0.0'
             }
         });
@@ -33,13 +34,14 @@ export class HealthController {
             success: true,
             data: {
                 status: 'healthy',
+                service: 'Ark.Alliance.TrendsCalculator.Backend',
                 uptime: process.uptime(),
-                timestamp: Date.now(),
+                timestamp: new Date().toISOString(),
                 version: '1.0.0',
-                services: {
-                    database: 'healthy',
-                    websocket: 'healthy',
-                    ai: 'healthy'
+                checks: {
+                    database: { status: 'ok' },
+                    websocket: { status: 'ok' },
+                    ai: { status: 'ok' }
                 },
                 memory: {
                     used: process.memoryUsage().heapUsed,

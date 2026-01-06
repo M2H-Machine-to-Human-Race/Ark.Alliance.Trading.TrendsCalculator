@@ -4,27 +4,24 @@
  * @description
  * ViewModel layer for Visualization Page following MVVM pattern.
  * Manages chart state, symbol selection, and time precision.
+ * Integrates with FinancialChart from ark-alliance-react-ui.
  * 
  * @author Ark.Alliance
- * @version 1.0.0
+ * @version 2.0.0
  * @since 2025-12-27
- * 
- * @remarks
- * This ViewModel:
- * - Manages symbol selection state
- * - Manages time precision state
- * - Provides available symbols list
- * - Follows MVVM separation: NO UI/DOM logic here
  */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useTrends } from '../../contexts/TrendsContext';
-import type { VisualizationPageModel, SymbolOption, TimePrecision } from './VisualizationPage.model';
+import { TrendDirection } from '@share/trends';
+import type { VisualizationPageModel, SymbolOption, TimePrecision, RealTimePricePoint, TrendPrediction } from './VisualizationPage.model';
 import websocketService, { SocketEvents } from '../../services/websocket';
 import { getKlines } from '../../services/api/binance.api';
 
 export function useVisualizationViewModel() {
     const { state } = useTrends();
+    const priceIndexRef = useRef(0);
+    const predictionCounterRef = useRef(0);
 
     const [model, setModel] = useState<VisualizationPageModel>({
         isLoading: true,
@@ -59,6 +56,8 @@ export function useVisualizationViewModel() {
         if (!symbol) return;
 
         // Reset data on symbol change
+        priceIndexRef.current = 0;
+        predictionCounterRef.current = 0;
         setModel(prev => ({ ...prev, priceData: [], predictions: [] }));
 
         /**
@@ -70,26 +69,6 @@ export function useVisualizationViewModel() {
             return isNaN(parsed) ? 0 : parsed;
         };
 
-        /**
-         * Validates a candlestick data point, returns null if invalid
-         */
-        const validateCandlestick = (k: any, index: number) => {
-            // Time is required - try openTime, time, or generate from index
-            const time = k.openTime ?? k.time ?? (Date.now() - (100 - index) * 60000);
-            const open = safeParseFloat(k.open);
-            const high = safeParseFloat(k.high);
-            const low = safeParseFloat(k.low);
-            const close = safeParseFloat(k.close);
-            const volume = safeParseFloat(k.volume);
-
-            // Skip if all OHLC values are 0 (invalid data)
-            if (open === 0 && high === 0 && low === 0 && close === 0) {
-                return null;
-            }
-
-            return { time, open, high, low, close, volume };
-        };
-
         // 1. Fetch historical klines to pre-fill chart
         const fetchHistoricalData = async () => {
             try {
@@ -97,19 +76,31 @@ export function useVisualizationViewModel() {
                 const klines = await getKlines(symbol, '1m', 100);
 
                 if (klines && klines.length > 0) {
-                    // Format and validate as CandlestickDataPoint for FinancialChart
-                    const historicalData = klines
-                        .map((k, index) => validateCandlestick(k, index))
-                        .filter((point): point is NonNullable<typeof point> => point !== null);
+                    // Format as RealTimePricePoint for chart
+                    const historicalData: RealTimePricePoint[] = [];
+
+                    klines.forEach((k: any, i: number) => {
+                        const price = safeParseFloat(k.close);
+                        const timestamp = k.openTime ?? k.time ?? (Date.now() - (100 - i) * 60000);
+                        const volume = safeParseFloat(k.volume);
+
+                        if (price > 0) {
+                            historicalData.push({
+                                index: i,
+                                price,
+                                timestamp,
+                                volume,
+                            });
+                        }
+                    });
 
                     if (historicalData.length > 0) {
+                        priceIndexRef.current = historicalData.length;
                         setModel(prev => ({
                             ...prev,
                             priceData: historicalData,
                         }));
-                        console.log(`[VisualizationPage] Loaded ${historicalData.length} valid candlesticks`);
-                    } else {
-                        console.warn('[VisualizationPage] No valid candlestick data received');
+                        console.log(`[VisualizationPage] Loaded ${historicalData.length} price points`);
                     }
                 }
             } catch (error) {
@@ -123,10 +114,8 @@ export function useVisualizationViewModel() {
         websocketService.subscribeToSymbol(symbol);
 
         const handlePriceUpdate = (data: any) => {
-            console.log('[VisualizationPage] Price Update Received:', data, 'Current Symbol:', symbol);
             if (data.symbol !== symbol) return;
 
-            // Validate price data
             const price = safeParseFloat(data.price);
             const volume = safeParseFloat(data.volume);
             const timestamp = data.timestamp ?? Date.now();
@@ -135,14 +124,12 @@ export function useVisualizationViewModel() {
             if (price === 0) return;
 
             setModel(prev => {
-                // Create candlestick-compatible data point
-                const newPoint = {
-                    time: timestamp,
-                    open: price,
-                    high: price,
-                    low: price,
-                    close: price,
-                    volume: volume,
+                const newIndex = priceIndexRef.current++;
+                const newPoint: RealTimePricePoint = {
+                    index: newIndex,
+                    price,
+                    timestamp,
+                    volume,
                 };
                 // Keep last 100 points
                 const newData = [...prev.priceData, newPoint].slice(-100);
@@ -153,25 +140,23 @@ export function useVisualizationViewModel() {
         const handleTrendUpdate = (data: any) => {
             if (data.symbol !== symbol) return;
 
-            // Map backend trend event to prediction marker for chart
             setModel(prev => {
-                const currentPriceIndex = prev.priceData.length > 0
-                    ? prev.priceData[prev.priceData.length - 1].index
+                // Get the current price from latest price data point
+                const latestPrice = prev.priceData.length > 0
+                    ? prev.priceData[prev.priceData.length - 1].price
                     : 0;
 
-                const prediction = {
-                    index: currentPriceIndex,
+                // Create TrendPrediction using shared TrendDirection enum
+                const prediction: TrendPrediction = {
+                    id: `pred-${++predictionCounterRef.current}`,
                     timestamp: data.timestamp || Date.now(),
-                    direction: data.direction, // 'LONG', 'SHORT', 'WAIT'
-                    confidence: data.confidence || 0,
+                    priceAtPrediction: latestPrice,
+                    direction: data.direction as TrendDirection,
                     compositeScore: data.compositeScore || 0,
-                    // Symbol for marker: ▲ for LONG, ▼ for SHORT, ● for WAIT
-                    marker: data.direction === 'LONG' ? '▲'
-                        : data.direction === 'SHORT' ? '▼'
-                            : '●',
-                    color: data.direction === 'LONG' ? '#00ff88'
-                        : data.direction === 'SHORT' ? '#ff4466'
-                            : '#ffaa00',
+                    confidence: data.confidence || 0,
+                    isValidated: false,
+                    showHorizon: true,
+                    horizonMs: 60000, // 1 minute forecast horizon
                 };
 
                 // Keep last 50 predictions
@@ -206,8 +191,37 @@ export function useVisualizationViewModel() {
         }));
     }, []);
 
+    // Format data for FinancialChart (candlestick format)
+    const chartData = model.priceData.map(p => ({
+        time: p.timestamp,
+        open: p.price,
+        high: p.price,
+        low: p.price,
+        close: p.price,
+        volume: p.volume || 0,
+    }));
+
+    // Format predictions for FinancialChart
+    const chartPredictions = model.predictions.map(p => ({
+        index: 0,
+        timestamp: p.timestamp,
+        direction: p.direction,
+        confidence: p.confidence,
+        compositeScore: p.compositeScore,
+        marker: p.direction === TrendDirection.LONG ? '▲'
+            : p.direction === TrendDirection.SHORT ? '▼'
+                : '●',
+        color: p.direction === TrendDirection.LONG ? '#22c55e'
+            : p.direction === TrendDirection.SHORT ? '#ef4444'
+                : '#eab308',
+    }));
+
     return {
-        model,
+        model: {
+            ...model,
+            chartData,
+            chartPredictions,
+        },
         handleSymbolChange,
         handlePrecisionChange,
     };

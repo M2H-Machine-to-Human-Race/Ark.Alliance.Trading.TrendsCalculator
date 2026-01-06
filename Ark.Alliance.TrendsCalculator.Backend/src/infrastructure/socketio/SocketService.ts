@@ -17,6 +17,7 @@ import {
     SymbolTrackingEvent,
     TrainingStatusEvent,
     AIAnalysisEvent,
+    AIExchangeEvent,
     SystemHealthEvent,
     BinanceStatusEvent,
     BinancePriceEvent
@@ -86,6 +87,22 @@ export class SocketService {
                     source: 'SocketService'
                 });
             });
+
+            // Handle AI telemetry subscription
+            socket.on('subscribe:ai-telemetry', () => {
+                socket.join(SocketRooms.AI_TELEMETRY);
+                systemLogger.info(`Client ${clientId} subscribed to AI telemetry`, {
+                    source: 'SocketService'
+                });
+            });
+
+            socket.on('unsubscribe:ai-telemetry', () => {
+                socket.leave(SocketRooms.AI_TELEMETRY);
+                systemLogger.info(`Client ${clientId} unsubscribed from AI telemetry`, {
+                    source: 'SocketService'
+                });
+            });
+
 
             // Handle health request
             socket.on(SocketEvents.REQUEST_HEALTH, () => {
@@ -191,6 +208,20 @@ export class SocketService {
         systemLogger.debug(`AI analysis emitted: ${data.symbol}`, {
             source: 'SocketService',
             details: { provider: data.provider, success: data.success }
+        });
+    }
+
+    /**
+     * Emit AI exchange event for telemetry monitoring
+     */
+    emitAIExchange(data: AIExchangeEvent): void {
+        if (!this.io) return;
+
+        this.io.to(SocketRooms.AI_TELEMETRY).emit(SocketEvents.AI_EXCHANGE, data);
+
+        systemLogger.debug(`AI exchange emitted: id=${data.id}`, {
+            source: 'SocketService',
+            details: { provider: data.provider, status: data.status }
         });
     }
 

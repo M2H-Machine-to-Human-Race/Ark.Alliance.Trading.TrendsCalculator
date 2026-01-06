@@ -1,0 +1,121 @@
+{
+    "id": "AITEL-001",
+    "name": "Strong Uptrend - Expected LONG",
+    "description": "Mathematically generated strong uptrend with 5% price increase over 10 candles. Expected AI answer: LONG with high confidence.",
+    "category": "ai-telemetry",
+    "component": "AITelemetryAccuracy",
+    "generator": "MathematicalTimeSeries",
+    "input": {
+        "symbol": "TESTUSDT",
+        "lastPrice": 105.00,
+        "imbalance": 0.35,
+        "volatilityScore": 15,
+        "strategyParams": {
+            "investment": 100,
+            "sigma": 0.003,
+            "takeProfitPnlClick": 0.0015,
+            "riskTolerance": "MEDIUM"
+        },
+        "klines": [
+            {
+                "open": 100.00,
+                "high": 100.50,
+                "low": 99.80,
+                "close": 100.40,
+                "volume": 1000
+            },
+            {
+                "open": 100.40,
+                "high": 101.00,
+                "low": 100.20,
+                "close": 100.90,
+                "volume": 1100
+            },
+            {
+                "open": 100.90,
+                "high": 101.50,
+                "low": 100.70,
+                "close": 101.40,
+                "volume": 1200
+            },
+            {
+                "open": 101.40,
+                "high": 102.00,
+                "low": 101.20,
+                "close": 101.90,
+                "volume": 1300
+            },
+            {
+                "open": 101.90,
+                "high": 102.50,
+                "low": 101.70,
+                "close": 102.40,
+                "volume": 1400
+            },
+            {
+                "open": 102.40,
+                "high": 103.00,
+                "low": 102.20,
+                "close": 102.90,
+                "volume": 1500
+            },
+            {
+                "open": 102.90,
+                "high": 103.50,
+                "low": 102.70,
+                "close": 103.40,
+                "volume": 1600
+            },
+            {
+                "open": 103.40,
+                "high": 104.00,
+                "low": 103.20,
+                "close": 103.90,
+                "volume": 1700
+            },
+            {
+                "open": 103.90,
+                "high": 104.50,
+                "low": 103.70,
+                "close": 104.40,
+                "volume": 1800
+            },
+            {
+                "open": 104.40,
+                "high": 105.20,
+                "low": 104.20,
+                "close": 105.00,
+                "volume": 1900
+            }
+        ],
+        "mathematicalAnalysis": {
+            "priceChange": 5.0,
+            "priceChangePercent": 5.0,
+            "linearRegressionSlope": 0.5,
+            "rSquared": 0.98,
+            "averageTrueRange": 0.60,
+            "volumeTrend": "increasing",
+            "higherHighs": 10,
+            "higherLows": 10
+        }
+    },
+    "expectedResults": {
+        "tendance": "LONG",
+        "confidenceMin": 0.70,
+        "confidenceMax": 1.0,
+        "sigmaMin": 0.002,
+        "sigmaMax": 0.01,
+        "takeProfitPnlClickMin": 0.001,
+        "takeProfitPnlClickMax": 0.005,
+        "reasoningMustContain": [
+            "uptrend",
+            "bullish",
+            "higher"
+        ]
+    },
+    "assertions": [
+        "AI should return LONG for strong uptrend",
+        "Confidence should be >= 0.70",
+        "Reasoning should mention bullish/uptrend patterns"
+    ]
+}

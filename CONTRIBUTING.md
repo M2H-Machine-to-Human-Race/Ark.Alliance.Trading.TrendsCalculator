@@ -81,7 +81,7 @@ cp .env.example .env
 
 Edit `.env` with your configuration:
 - Binance API credentials (or use testnet)
-- Google Gemini API key (for AI features)
+- AI API key (Anthropic, OpenAI, or Gemini - for AI features)
 - Port configurations
 
 ### 3. Build and Run
