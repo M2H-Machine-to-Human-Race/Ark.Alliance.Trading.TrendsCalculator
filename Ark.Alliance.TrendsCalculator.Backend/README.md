@@ -48,7 +48,21 @@ src/
 | SymbolController | `/api/symbol` | Symbol tracking |
 | ConfigController | `/api/config` | Configuration |
 | TrainingController | `/api/training` | Training sessions |
+| AITelemetryController | `/api/ai` | AI settings, telemetry, forecast |
 | HealthController | `/health` | Health checks |
+
+### AI Telemetry Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/ai/settings` | Get AI provider configuration |
+| PUT | `/api/ai/settings` | Update AI configuration |
+| POST | `/api/ai/test-connection` | Test AI provider connection |
+| GET | `/api/ai/telemetry` | Get paginated AI exchange logs |
+| GET | `/api/ai/telemetry/:id` | Get detail for single log |
+| GET | `/api/ai/forecast-settings` | Get forecast horizon settings |
+| PUT | `/api/ai/forecast-settings` | Update forecast horizon settings |
+| GET | `/api/ai/stats` | Get AI telemetry statistics |
 
 ## Sequence Diagram
 
@@ -70,9 +84,31 @@ sequenceDiagram
 ## Dependencies
 
 - **express** - Web framework
-- **ws** - WebSocket server
+- **socket.io** - WebSocket server
 - **zod** - Schema validation
 - **dotenv** - Environment config
+
+## Socket.IO Events
+
+### Server → Client Events
+
+| Event | Description |
+|-------|-------------|
+| `trend:updated` | Real-time trend calculation update |
+| `buffer:progress` | Price buffer fill progress |
+| `symbol:added` | Symbol tracking started |
+| `symbol:removed` | Symbol tracking stopped |
+| `ai:exchange` | AI exchange telemetry event |
+| `health:update` | System health status update |
+
+### Client → Server Events
+
+| Event | Description |
+|-------|-------------|
+| `subscribe:symbol` | Subscribe to symbol updates |
+| `unsubscribe:symbol` | Unsubscribe from symbol |
+| `request:health` | Request health status |
+| `subscribe:ai-telemetry` | Subscribe to AI telemetry room |
 
 ## Scripts
 

@@ -64,7 +64,12 @@ export const SocketEvents = {
     AI_ANALYSIS: 'ai:analysis',
     HEALTH_UPDATE: 'health:update',
     ERROR: 'error',
+
+    // Binance events
     BINANCE_PRICE_UPDATE: 'binance:price',
+    BINANCE_CONNECTED: 'binance:connected',
+    BINANCE_DISCONNECTED: 'binance:disconnected',
+    BINANCE_ERROR: 'binance:error',
 
     // Client → Server
     SUBSCRIBE_SYMBOL: 'subscribe:symbol',

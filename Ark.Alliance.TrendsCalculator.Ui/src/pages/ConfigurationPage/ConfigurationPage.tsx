@@ -3,16 +3,17 @@
  * @module pages/ConfigurationPage
  * @description
  * System configuration and settings management.
- * Includes AI provider, calculation parameters, and WebSocket settings.
+ * Includes AI provider, calculation parameters, forecast, and WebSocket settings.
  * 
  * VIEW ONLY - All logic in ConfigurationPage.viewmodel.ts
  * 
- * @author Ark.Alliance
- * @version 1.0.0
+ * @author Ark.Alliance Team
+ * @version 2.0.0
  * @since 2025-12-27
  */
 
 import { Panel } from 'ark-alliance-react-ui';
+import { AIProviderType } from '@share/trends';
 import { useConfigurationViewModel } from './ConfigurationPage.viewmodel';
 import styles from './ConfigurationPage.module.css';
 
@@ -22,9 +23,18 @@ export function ConfigurationPage() {
         updateAISetting,
         updateCalculationSetting,
         updateWebSocketSetting,
+        updateForecastSetting,
         handleSave,
         handleReset,
     } = useConfigurationViewModel();
+
+    /**
+     * Format milliseconds to human-readable duration
+     */
+    const formatDuration = (ms: number): string => {
+        if (ms < 60000) return `${ms / 1000}s`;
+        return `${ms / 60000}m`;
+    };
 
     return (
         <div className={styles.container} role="main">
@@ -40,14 +50,19 @@ export function ConfigurationPage() {
                         <label>Provider</label>
                         <select
                             value={model.settings.ai.provider}
-                            onChange={(e) => updateAISetting('provider', e.target.value)}
+                            onChange={(e) => updateAISetting('provider', e.target.value as AIProviderType)}
                             className={styles.input}
                         >
-                            <option value="gemini">Google Gemini</option>
-                            <option value="openai">OpenAI</option>
-                            <option value="none">None (Math Only)</option>
+                            <option value={AIProviderType.GEMINI}>Google Gemini</option>
+                            <option value={AIProviderType.OPENAI}>OpenAI</option>
+                            <option value={AIProviderType.ANTHROPIC}>Anthropic Claude</option>
+                            <option value={AIProviderType.DEEPSEEK}>DeepSeek</option>
+                            <option value={AIProviderType.PERPLEXITY}>Perplexity</option>
+                            <option value={AIProviderType.GROK}>xAI Grok</option>
+                            <option value={AIProviderType.NONE}>None (Math Only)</option>
                         </select>
                     </div>
+
 
                     <div className={styles.field}>
                         <label>Model</label>
@@ -151,6 +166,42 @@ export function ConfigurationPage() {
                             onChange={(e) => updateCalculationSetting('emaSlowPeriod', parseInt(e.target.value))}
                             className={styles.slider}
                         />
+                    </div>
+                </div>
+            </Panel>
+
+            {/* Forecast Horizon Settings */}
+            <Panel title="Forecast Horizon Settings" collapsible={true}>
+                <div className={styles.settingsGrid}>
+                    <div className={styles.field}>
+                        <label>Show Forecast Horizon</label>
+                        <label className={styles.checkboxLabel}>
+                            <input
+                                type="checkbox"
+                                checked={model.settings.forecast.showHorizon}
+                                onChange={(e) => updateForecastSetting('showHorizon', e.target.checked)}
+                            />
+                            <span>Display forecast horizon overlay on charts</span>
+                        </label>
+                    </div>
+
+                    <div className={styles.field}>
+                        <label>Horizon Duration</label>
+                        <select
+                            value={model.settings.forecast.horizonMs}
+                            onChange={(e) => updateForecastSetting('horizonMs', parseInt(e.target.value))}
+                            className={styles.input}
+                            disabled={!model.settings.forecast.showHorizon}
+                        >
+                            {model.settings.forecast.horizonPresets.map((preset) => (
+                                <option key={preset} value={preset}>
+                                    {formatDuration(preset)}
+                                </option>
+                            ))}
+                        </select>
+                        <small className={styles.help}>
+                            Duration of the forecast prediction window
+                        </small>
                     </div>
                 </div>
             </Panel>

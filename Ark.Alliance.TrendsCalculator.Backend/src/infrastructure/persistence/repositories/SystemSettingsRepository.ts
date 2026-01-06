@@ -3,7 +3,8 @@
  * @module Data/repositories/SystemSettingsRepository
  */
 
-import { SystemSetting, systemSettingFromRow, getTypedValue, SettingCategory, LogLevel } from '../entities/SystemSettings';
+import { SystemSetting, systemSettingFromRow, getTypedValue, SettingDataTypeValue, SettingCategoryValue } from '../entities/SystemSettings';
+import { SettingCategory, LogLevel, SettingDataType } from '@share/enums';
 
 /**
  * In-memory implementation (will be replaced with SQLite when available)
@@ -87,6 +88,9 @@ export class SystemSettingsRepository {
 
         { key: 'market_data_ws_reconnect_interval_ms', value: '2000', dataType: 'number', description: 'Market data WS reconnect interval', category: 'binance' },
 
+        // WebSocket Reconnection Settings
+        { key: 'websocket_reconnection_delay_ms', value: '1000', dataType: 'number', description: 'WebSocket reconnection delay in milliseconds', category: 'general' },
+
         // Market Data - Default streaming symbols (JSON array)
         { key: 'market_data_default_symbols', value: '["BTCUSDT","ETHUSDT","BNBUSDT","XRPUSDT","SOLUSDT","ADAUSDT","DOGEUSDT","AVAXUSDT","DOTUSDT","MATICUSDT"]', dataType: 'json', description: 'Default symbols to stream at startup', category: 'binance' },
 
@@ -120,6 +124,32 @@ export class SystemSettingsRepository {
         { key: 'ia_inversion_cooldown_ms', value: '5000', dataType: 'number', description: 'Cooldown period after inversion before AI analysis (ms)', category: 'ai' },
         { key: 'ia_auto_apply_adjustments', value: 'true', dataType: 'boolean', description: 'Automatically apply AI-recommended parameter adjustments', category: 'ai' },
         { key: 'ia_max_adjustment_percent', value: '0.2', dataType: 'number', description: 'Maximum adjustment percentage per parameter (0.2 = 20%)', category: 'ai' },
+
+        // Forecast Horizon Settings (UI configurable)
+        { key: 'forecast.show_horizon', value: 'true', dataType: 'boolean', description: 'Show forecast horizon overlay on charts', category: 'general' },
+        { key: 'forecast.horizon_ms', value: '60000', dataType: 'number', description: 'Forecast horizon duration in milliseconds (default 1 minute)', category: 'general' },
+        { key: 'forecast.horizon_presets', value: '[30000,60000,300000,900000]', dataType: 'json', description: 'Available horizon presets (30s, 1m, 5m, 15m)', category: 'general' },
+
+        // Order Tracking
+        { key: 'order_tracking_enabled', value: 'true', dataType: 'boolean', description: 'Enable recording of all orders to database', category: 'strategy' },
+
+        // Trend Analysis Mode - Close position and analyze before reopening
+        { key: 'strategy_trend_wait_enabled', value: 'true', dataType: 'boolean', description: 'Close position first, analyze trend, then open in trend direction', category: 'strategy' },
+        { key: 'strategy_trend_analysis_cycles', value: '4', dataType: 'number', description: 'Number of refresh cycles to analyze trend before reopening', category: 'strategy' },
+
+        // Enhanced Trend Confirmation Settings
+        { key: 'trend_min_data_points', value: '100', dataType: 'number', description: 'Minimum data points before trend calculation is valid (400 = ~6.6 min with 1s ticks)', category: 'strategy' },
+        { key: 'trend_min_r_squared', value: '0.4', dataType: 'number', description: 'Minimum R² for trend confidence (0-1, higher = stricter)', category: 'strategy' },
+        { key: 'trend_composite_score_threshold', value: '0.35', dataType: 'number', description: 'Composite score threshold for LONG/SHORT (0.3-0.5 recommended)', category: 'strategy' },
+        { key: 'trend_confirmation_max_wait_ms', value: '8000', dataType: 'number', description: 'Maximum time to wait for trend confirmation in ms (8s for faster opportunities)', category: 'strategy' },
+        { key: 'gtx_fallback_max_attempts', value: '50', dataType: 'number', description: 'Maximum GTX fallback attempts before giving up (prevents infinite loops)', category: 'strategy' },
+        { key: 'trend_short_term_min_points', value: '30', dataType: 'number', description: 'Minimum data points for short-term sigma-based trend (30 = ~30s)', category: 'strategy' },
+
+        // AI-Driven Inversion Optimization Settings
+        { key: 'ia_optimize_on_inversion', value: 'false', dataType: 'boolean', description: 'Enable AI optimization analysis after position inversion', category: 'ai' },
+        { key: 'ia_inversion_cooldown_ms', value: '5000', dataType: 'number', description: 'Cooldown period after inversion before AI analysis (ms)', category: 'ai' },
+        { key: 'ia_auto_apply_adjustments', value: 'true', dataType: 'boolean', description: 'Automatically apply AI-recommended parameter adjustments', category: 'ai' },
+        { key: 'ia_max_adjustment_percent_final', value: '0.2', dataType: 'number', description: 'Maximum adjustment percentage per parameter (0.2 = 20%)', category: 'ai' },
 
         // System state
         { key: 'active_environment', value: '', dataType: 'string', description: 'Currently active environment (TESTNET/MAINNET)', category: 'system' }
@@ -206,8 +236,12 @@ export class SystemSettingsRepository {
 
     /**
      * Set a setting value (creates if not exists)
+     * @param key - Setting key
+     * @param value - Setting value as string
+     * @param dataType - Data type (defaults to 'string')
+     * @param category - Category (defaults to 'system')
      */
-    set(key: string, value: string): void {
+    set(key: string, value: string, dataType?: SettingDataType | string, category?: SettingCategory | string): void {
         const existing = this.settings.get(key);
         const now = Date.now();
 
@@ -215,6 +249,8 @@ export class SystemSettingsRepository {
             this.settings.set(key, {
                 ...existing,
                 value,
+                dataType: (dataType as SettingDataTypeValue) || existing.dataType,
+                category: (category as SettingCategoryValue) || existing.category,
                 updatedAt: now
             });
         } else {
@@ -222,9 +258,9 @@ export class SystemSettingsRepository {
             this.settings.set(key, {
                 key,
                 value,
-                dataType: 'string',
+                dataType: (dataType as SettingDataType) || SettingDataType.STRING,
                 description: 'Dynamically created setting',
-                category: 'system',
+                category: (category as SettingCategory) || SettingCategory.SYSTEM,
                 createdAt: now,
                 updatedAt: now
             });
@@ -283,9 +319,9 @@ export class SystemSettingsRepository {
      * Get configured log level with validation
      */
     getLogLevel(): LogLevel {
-        const value = this.getString('log_level', 'info') as LogLevel;
-        const validLevels: LogLevel[] = ['debug', 'info', 'warn', 'error'];
-        return validLevels.includes(value) ? value : 'info';
+        const value = this.getString('log_level', LogLevel.INFO);
+        const validLevels = [LogLevel.DEBUG, LogLevel.INFO, LogLevel.WARN, LogLevel.ERROR];
+        return validLevels.includes(value as LogLevel) ? (value as LogLevel) : LogLevel.INFO;
     }
 
     // ═══════════════════════════════════════════════════════════════════════════

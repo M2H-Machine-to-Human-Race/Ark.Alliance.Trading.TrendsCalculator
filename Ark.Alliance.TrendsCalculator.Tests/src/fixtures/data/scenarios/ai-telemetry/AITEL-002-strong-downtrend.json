@@ -1,0 +1,121 @@
+{
+    "id": "AITEL-002",
+    "name": "Strong Downtrend - Expected SHORT",
+    "description": "Mathematically generated strong downtrend with 5% price decrease over 10 candles. Expected AI answer: SHORT with high confidence.",
+    "category": "ai-telemetry",
+    "component": "AITelemetryAccuracy",
+    "generator": "MathematicalTimeSeries",
+    "input": {
+        "symbol": "TESTUSDT",
+        "lastPrice": 95.00,
+        "imbalance": -0.35,
+        "volatilityScore": 18,
+        "strategyParams": {
+            "investment": 100,
+            "sigma": 0.003,
+            "takeProfitPnlClick": 0.0015,
+            "riskTolerance": "MEDIUM"
+        },
+        "klines": [
+            {
+                "open": 100.00,
+                "high": 100.20,
+                "low": 99.50,
+                "close": 99.60,
+                "volume": 1000
+            },
+            {
+                "open": 99.60,
+                "high": 99.80,
+                "low": 99.00,
+                "close": 99.10,
+                "volume": 1100
+            },
+            {
+                "open": 99.10,
+                "high": 99.30,
+                "low": 98.50,
+                "close": 98.60,
+                "volume": 1200
+            },
+            {
+                "open": 98.60,
+                "high": 98.80,
+                "low": 98.00,
+                "close": 98.10,
+                "volume": 1300
+            },
+            {
+                "open": 98.10,
+                "high": 98.30,
+                "low": 97.50,
+                "close": 97.60,
+                "volume": 1400
+            },
+            {
+                "open": 97.60,
+                "high": 97.80,
+                "low": 97.00,
+                "close": 97.10,
+                "volume": 1500
+            },
+            {
+                "open": 97.10,
+                "high": 97.30,
+                "low": 96.50,
+                "close": 96.60,
+                "volume": 1600
+            },
+            {
+                "open": 96.60,
+                "high": 96.80,
+                "low": 96.00,
+                "close": 96.10,
+                "volume": 1700
+            },
+            {
+                "open": 96.10,
+                "high": 96.30,
+                "low": 95.50,
+                "close": 95.60,
+                "volume": 1800
+            },
+            {
+                "open": 95.60,
+                "high": 95.80,
+                "low": 95.00,
+                "close": 95.00,
+                "volume": 1900
+            }
+        ],
+        "mathematicalAnalysis": {
+            "priceChange": -5.0,
+            "priceChangePercent": -5.0,
+            "linearRegressionSlope": -0.5,
+            "rSquared": 0.97,
+            "averageTrueRange": 0.65,
+            "volumeTrend": "increasing",
+            "lowerHighs": 10,
+            "lowerLows": 10
+        }
+    },
+    "expectedResults": {
+        "tendance": "SHORT",
+        "confidenceMin": 0.70,
+        "confidenceMax": 1.0,
+        "sigmaMin": 0.002,
+        "sigmaMax": 0.01,
+        "takeProfitPnlClickMin": 0.001,
+        "takeProfitPnlClickMax": 0.005,
+        "reasoningMustContain": [
+            "downtrend",
+            "bearish",
+            "lower"
+        ]
+    },
+    "assertions": [
+        "AI should return SHORT for strong downtrend",
+        "Confidence should be >= 0.70",
+        "Reasoning should mention bearish/downtrend patterns"
+    ]
+}

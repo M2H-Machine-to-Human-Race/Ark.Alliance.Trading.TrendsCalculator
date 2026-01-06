@@ -93,6 +93,19 @@ The **Ark.Alliance.TrendsCalculator.Ui** is a production-ready React dashboard t
 - **Prediction Validation**: Recent prediction vs actual results
 - **Performance Tracking**: Success rates per direction
 
+#### 6. AI Telemetry Dashboard
+- **Real-time Logs**: Paginated grid of AI exchange logs
+- **Detail Modal**: Full prompt/response view for each log
+- **Statistics Panel**: Success rate, average latency, error count
+- **Provider Toggle**: Enable/disable AI analysis
+- **Connection Test**: Verify AI provider connectivity
+- **WebSocket Events**: Real-time `ai:exchange` event updates
+
+#### 7. Forecast Settings (Configuration Page)
+- **Horizon Toggle**: Show/hide forecast horizon overlay
+- **Duration Presets**: 30s, 1m, 5m, 15m configurable presets
+- **AI Provider Selection**: Gemini, OpenAI, Anthropic, DeepSeek, Perplexity, Grok
+
 ### 🏗️ Architecture Features
 
 - **MVVM Pattern**: Strict separation (Model, ViewModel, View)
@@ -158,8 +171,9 @@ src/
 │   ├── OverviewPage/                 # Dashboard home
 │   ├── SymbolsPage/                  # Symbol management
 │   ├── VisualizationPage/            # Chart display
-│   ├── ConfigurationPage/            # Settings
-│   └── TrainingPage/                 # Training metrics
+│   ├── ConfigurationPage/            # Settings (AI, forecast, WebSocket)
+│   ├── TrainingPage/                 # Training metrics
+│   └── AITelemetryPage/              # AI exchange logs & statistics
 ├── services/
 │   ├── api/
 │   │   ├── client.ts                 # Axios instance

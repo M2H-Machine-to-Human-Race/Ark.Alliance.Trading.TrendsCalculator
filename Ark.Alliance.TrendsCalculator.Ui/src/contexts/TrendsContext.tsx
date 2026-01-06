@@ -156,6 +156,27 @@ export function TrendsProvider({ children }: { children: ReactNode }) {
             });
         };
 
+        // Binance price update event (backend: 'binance:price')
+        const handleBinancePriceUpdate = (data: any) => {
+            console.log('[TrendsContext] Price update:', data.symbol, data.price);
+            setState((prev) => {
+                // Only update if we're tracking this symbol
+                if (!prev.symbols[data.symbol]) return prev;
+                return {
+                    ...prev,
+                    symbols: {
+                        ...prev.symbols,
+                        [data.symbol]: {
+                            ...prev.symbols[data.symbol],
+                            lastUpdate: data.timestamp || Date.now(),
+                            isActive: true,
+                        },
+                    },
+                    lastUpdate: Date.now(),
+                };
+            });
+        };
+
         // Register event listeners
         socket.on('connect', handleConnect);
         socket.on('disconnect', handleDisconnect);
@@ -163,6 +184,7 @@ export function TrendsProvider({ children }: { children: ReactNode }) {
         socket.on(SocketEvents.BUFFER_PROGRESS, handleBufferProgress);
         socket.on(SocketEvents.SYMBOL_ADDED, handleSymbolAdded);
         socket.on(SocketEvents.SYMBOL_REMOVED, handleSymbolRemoved);
+        socket.on(SocketEvents.BINANCE_PRICE_UPDATE, handleBinancePriceUpdate);
 
         // Cleanup on unmount
         return () => {
@@ -172,6 +194,7 @@ export function TrendsProvider({ children }: { children: ReactNode }) {
             socket.off(SocketEvents.BUFFER_PROGRESS, handleBufferProgress);
             socket.off(SocketEvents.SYMBOL_ADDED, handleSymbolAdded);
             socket.off(SocketEvents.SYMBOL_REMOVED, handleSymbolRemoved);
+            socket.off(SocketEvents.BINANCE_PRICE_UPDATE, handleBinancePriceUpdate);
             websocketService.disconnect();
         };
     }, []);

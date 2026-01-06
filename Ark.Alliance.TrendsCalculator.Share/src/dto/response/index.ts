@@ -15,3 +15,9 @@ export * from './AIConfigResponseDto';
 export * from './CalculationConfigResponseDto';
 export * from './BinanceConnectionStatusDto';
 export * from './BinanceTickerDto';
+
+// AI Telemetry DTOs
+export * from './AITelemetryGridDto';
+export * from './AITelemetryDetailDto';
+export * from './AISettingsDto';
+export * from './ForecastSettingsDto';

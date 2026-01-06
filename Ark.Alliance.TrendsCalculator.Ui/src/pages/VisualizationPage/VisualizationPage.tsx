@@ -3,16 +3,16 @@
  * @module pages/VisualizationPage
  * @description
  * Real-time price chart visualization with trend predictions.
- * Includes symbol selection and time precision controls.
+ * Uses FinancialChart from ark-alliance-react-ui for advanced charting.
  * 
  * VIEW ONLY - All logic in VisualizationPage.viewmodel.ts
  * 
  * @author Ark.Alliance
- * @version 1.0.0
+ * @version 2.0.0
  * @since 2025-12-27
  */
 
-import { Panel, FinancialChart, NeonButton } from 'ark-alliance-react-ui';
+import { Panel, NeonButton, FinancialChart } from 'ark-alliance-react-ui';
 import { useVisualizationViewModel } from './VisualizationPage.viewmodel';
 import styles from './VisualizationPage.module.css';
 
@@ -82,14 +82,14 @@ export function VisualizationPage() {
                 </div>
             </Panel >
 
-            {/* Price Chart */}
+            {/* Price Chart - Using FinancialChart with line mode for real-time data */}
             <Panel title={`${model.selectedSymbol} - Real-Time Chart`} collapsible={false}>
                 <FinancialChart
                     symbol={model.selectedSymbol}
-                    candlestickData={model.priceData}
-                    predictions={model.predictions}
+                    candlestickData={model.chartData}
+                    predictions={model.chartPredictions}
                     isConnected={true}
-                    isStreaming={!model.isLoading}
+                    isStreaming={true}
                     chartType="line"
                     interval={model.precision}
                     showGrid={true}
@@ -98,9 +98,9 @@ export function VisualizationPage() {
                 {/* Trend Legend */}
                 {model.predictions.length > 0 && (
                     <div className={styles.trendLegend}>
-                        <span style={{ color: '#00ff88' }}>▲ LONG</span>
-                        <span style={{ color: '#ff4466' }}>▼ SHORT</span>
-                        <span style={{ color: '#ffaa00' }}>● WAIT</span>
+                        <span style={{ color: '#22c55e' }}>▲ LONG</span>
+                        <span style={{ color: '#ef4444' }}>▼ SHORT</span>
+                        <span style={{ color: '#eab308' }}>● WAIT</span>
                         <span className={styles.latestTrend}>
                             Latest: {model.predictions[model.predictions.length - 1]?.direction || '-'}
                             {' '}({((model.predictions[model.predictions.length - 1]?.confidence || 0) * 100).toFixed(0)}%)

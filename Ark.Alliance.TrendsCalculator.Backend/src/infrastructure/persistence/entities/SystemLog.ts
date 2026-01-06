@@ -4,8 +4,10 @@
  * Represents a system-level log entry from the system_logs table.
  */
 
-export type SystemLogLevel = 'debug' | 'info' | 'warn' | 'error';
+import { LogLevel } from '@share/enums';
 
+// Type alias for backward compatibility
+export type SystemLogLevel = LogLevel;
 export interface SystemLog {
     id: number;
     userId?: number;

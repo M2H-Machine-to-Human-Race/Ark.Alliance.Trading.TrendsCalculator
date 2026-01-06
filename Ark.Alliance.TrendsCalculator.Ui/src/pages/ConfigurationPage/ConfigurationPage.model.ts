@@ -5,22 +5,24 @@
  * Defines TypeScript interfaces for system configuration settings.
  * All models are immutable and follow strict typing.
  * 
- * @author Ark.Alliance
- * @version 1.0.0
+ * @author Ark.Alliance Team
+ * @version 2.0.0
  * @since 2025-12-27
  */
+
+import { AIProviderType } from '@share/trends';
 
 /**
  * AI Provider configuration settings
  * @interface AIProviderSettings
- * @property {'gemini' | 'openai' | 'none'} provider - AI provider selection
+ * @property {AIProviderType} provider - AI provider selection
  * @property {string} model - Model name (e.g., 'gemini-2.0-flash')
  * @property {number} temperature - Temperature setting (0-2)
  * @property {number} maxTokens - Maximum tokens for response
  * @property {string} [apiKey] - API key for the provider (optional, min 10 chars)
  */
 export interface AIProviderSettings {
-    provider: 'gemini' | 'openai' | 'none';
+    provider: AIProviderType;
     model: string;
     temperature: number;
     maxTokens: number;
@@ -56,16 +58,31 @@ export interface WebSocketSettings {
 }
 
 /**
+ * Forecast horizon settings
+ * @interface ForecastSettings
+ * @property {boolean} showHorizon - Show forecast horizon overlay on charts
+ * @property {number} horizonMs - Forecast horizon duration in milliseconds
+ * @property {number[]} horizonPresets - Available horizon preset values
+ */
+export interface ForecastSettings {
+    showHorizon: boolean;
+    horizonMs: number;
+    horizonPresets: number[];
+}
+
+/**
  * Complete system settings
  * @interface SystemSettings
  * @property {AIProviderSettings} ai - AI provider configuration
  * @property {CalculationSettings} calculation - Calculation parameters
  * @property {WebSocketSettings} websocket - WebSocket configuration
+ * @property {ForecastSettings} forecast - Forecast horizon settings
  */
 export interface SystemSettings {
     ai: AIProviderSettings;
     calculation: CalculationSettings;
     websocket: WebSocketSettings;
+    forecast: ForecastSettings;
 }
 
 /**

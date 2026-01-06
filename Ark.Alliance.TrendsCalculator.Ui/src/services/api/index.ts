@@ -18,6 +18,7 @@ export * from './trend.api';
 export * from './binance.api';
 export * from './settings.api';
 export * from './ai.api';
+export * from './aiTelemetry.api';
 
 // Note: interfaces folder is intentionally NOT re-exported here to avoid
 // duplicate export conflicts. Types are defined directly in their API files.

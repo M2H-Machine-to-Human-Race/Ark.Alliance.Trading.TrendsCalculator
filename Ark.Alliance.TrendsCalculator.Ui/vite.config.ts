@@ -21,14 +21,14 @@ export default defineConfig({
         // Use HTTP for local development
         proxy: {
             '/api': {
-                // Backend runs on HTTP by default (or HTTPS if selected at startup)
-                target: process.env.VITE_API_URL || 'http://localhost:3001',
+                // Backend runs on HTTP port 3075 by default
+                target: process.env.VITE_API_URL || 'http://localhost:3075',
                 changeOrigin: true,
                 secure: false, // Accept self-signed certificates from backend
                 ws: true, // Enable WebSocket proxying
             },
             '/socket.io': {
-                target: process.env.VITE_API_URL || 'http://localhost:3001',
+                target: process.env.VITE_API_URL || 'http://localhost:3075',
                 changeOrigin: true,
                 secure: false,
                 ws: true,

@@ -1,0 +1,122 @@
+{
+    "id": "AITEL-003",
+    "name": "Sideways Oscillation - Expected WAIT",
+    "description": "Mathematically generated sideways/ranging market with high-frequency oscillations. Expected AI answer: WAIT due to unclear direction.",
+    "category": "ai-telemetry",
+    "component": "AITelemetryAccuracy",
+    "generator": "MathematicalTimeSeries",
+    "input": {
+        "symbol": "TESTUSDT",
+        "lastPrice": 100.20,
+        "imbalance": 0.02,
+        "volatilityScore": 8,
+        "strategyParams": {
+            "investment": 100,
+            "sigma": 0.003,
+            "takeProfitPnlClick": 0.0015,
+            "riskTolerance": "MEDIUM"
+        },
+        "klines": [
+            {
+                "open": 100.00,
+                "high": 100.40,
+                "low": 99.60,
+                "close": 100.20,
+                "volume": 800
+            },
+            {
+                "open": 100.20,
+                "high": 100.50,
+                "low": 99.80,
+                "close": 99.90,
+                "volume": 750
+            },
+            {
+                "open": 99.90,
+                "high": 100.30,
+                "low": 99.50,
+                "close": 100.10,
+                "volume": 820
+            },
+            {
+                "open": 100.10,
+                "high": 100.40,
+                "low": 99.70,
+                "close": 99.80,
+                "volume": 780
+            },
+            {
+                "open": 99.80,
+                "high": 100.20,
+                "low": 99.50,
+                "close": 100.15,
+                "volume": 810
+            },
+            {
+                "open": 100.15,
+                "high": 100.50,
+                "low": 99.80,
+                "close": 99.95,
+                "volume": 790
+            },
+            {
+                "open": 99.95,
+                "high": 100.35,
+                "low": 99.60,
+                "close": 100.05,
+                "volume": 830
+            },
+            {
+                "open": 100.05,
+                "high": 100.45,
+                "low": 99.70,
+                "close": 99.85,
+                "volume": 760
+            },
+            {
+                "open": 99.85,
+                "high": 100.25,
+                "low": 99.55,
+                "close": 100.10,
+                "volume": 800
+            },
+            {
+                "open": 100.10,
+                "high": 100.45,
+                "low": 99.80,
+                "close": 100.20,
+                "volume": 815
+            }
+        ],
+        "mathematicalAnalysis": {
+            "priceChange": 0.20,
+            "priceChangePercent": 0.20,
+            "linearRegressionSlope": 0.02,
+            "rSquared": 0.15,
+            "averageTrueRange": 0.70,
+            "volumeTrend": "stable",
+            "oscillationCount": 5,
+            "rangeWidth": 1.0
+        }
+    },
+    "expectedResults": {
+        "tendance": "WAIT",
+        "confidenceMin": 0.0,
+        "confidenceMax": 0.50,
+        "sigmaMin": 0.001,
+        "sigmaMax": 0.005,
+        "takeProfitPnlClickMin": 0.0005,
+        "takeProfitPnlClickMax": 0.003,
+        "reasoningMustContain": [
+            "sideways",
+            "ranging",
+            "unclear",
+            "consolidat"
+        ]
+    },
+    "assertions": [
+        "AI should return WAIT for sideways/ranging market",
+        "Confidence should be < 0.50 (low confidence = WAIT)",
+        "Reasoning should mention consolidation or unclear direction"
+    ]
+}

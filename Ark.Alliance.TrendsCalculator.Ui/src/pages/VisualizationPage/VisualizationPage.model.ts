@@ -3,11 +3,45 @@
  * @module pages/VisualizationPage/VisualizationPage.model
  * @description
  * Defines TypeScript interfaces for visualization data and chart state.
+ * Types align with TrendPriceChart component from ark-alliance-react-ui.
  * 
  * @author Ark.Alliance
- * @version 1.0.0
+ * @version 2.0.0
  * @since 2025-12-27
  */
+
+import { TrendDirection } from '@share/trends';
+
+/**
+ * Real-time price point for TrendPriceChart
+ * @interface RealTimePricePoint
+ */
+export interface RealTimePricePoint {
+    index: number;
+    price: number;
+    timestamp: number;
+    volume?: number;
+}
+
+/**
+ * Trend prediction overlay for TrendPriceChart
+ * Uses shared TrendDirection enum for consistency across frontend/backend
+ * @interface TrendPrediction
+ */
+export interface TrendPrediction {
+    id: string;
+    timestamp: number;
+    priceAtPrediction: number;
+    direction: TrendDirection;
+    compositeScore: number;
+    confidence: number;
+    isValidated?: boolean;
+    priceAtValidation?: number;
+    actualDirection?: TrendDirection;
+    isCorrect?: boolean;
+    showHorizon?: boolean;
+    horizonMs?: number;
+}
 
 /**
  * Available trading symbols for visualization
@@ -33,15 +67,16 @@ export type TimePrecision = '1s' | '1m' | '15m';
  * @property {SymbolOption[]} availableSymbols - List of symbols to visualize
  * @property {string} selectedSymbol - Currently selected symbol
  * @property {TimePrecision} precision - Current time precision
- * @property {any[]} priceData - Data for the TrendPriceChart (e.g., historical prices)
- * @property {any[]} predictions - Prediction data for the chart
+ * @property {RealTimePricePoint[]} priceData - Data for the TrendPriceChart
+ * @property {TrendPrediction[]} predictions - Prediction data for the chart
  */
 export interface VisualizationPageModel {
     isLoading: boolean;
     availableSymbols: SymbolOption[];
     selectedSymbol: string;
     precision: TimePrecision;
-    // Data for TrendPriceChart
-    priceData: any[]; // Using any temporarily, should ideally match TrendPriceChart model
-    predictions: any[];
+    /** Real-time price data points for TrendPriceChart */
+    priceData: RealTimePricePoint[];
+    /** Trend predictions with validation state */
+    predictions: TrendPrediction[];
 }
