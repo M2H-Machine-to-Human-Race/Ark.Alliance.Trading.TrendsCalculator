@@ -218,6 +218,15 @@ Frontend connects via proxy (see UI documentation).
 
 ---
 
+## Author
+
+**Armand Richelet-Kleinberg**  
+M2H.Io Ark.Alliance Ecosystem
+
+*Developed with assistance from [Claude Sonnet](https://www.anthropic.com/claude) (Anthropic AI)*
+
+---
+
 ## Related Documents
 
 - [TrendsMicroService_Analysis.md](../Docs/TrendsMicroService_Analysis.md)

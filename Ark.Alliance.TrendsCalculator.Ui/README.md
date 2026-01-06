@@ -787,21 +787,9 @@ MIT License - See [LICENSE](LICENSE) file
 
 ---
 
-## Support
+## Author
 
-**Issues**: [GitHub Issues](https://github.com/your-repo/issues)  
-**Docs**: [Wiki](https://github.com/your-repo/wiki)  
-**Contact**: dev@ark-alliance.com
+**Armand Richelet-Kleinberg**  
+M2H.Io Ark.Alliance Ecosystem
 
----
-
-## Acknowledgments
-
-- **Ark.Alliance Team** - Architecture & design
-- **React Community** - Framework & ecosystem
-- **TypeScript Team** - Type safety
-- **Vite Team** - Build tool excellence
-
----
-
-**Built with ❤️ by Ark.Alliance**
+*Developed with assistance from [Claude Sonnet](https://www.anthropic.com/claude) (Anthropic AI)*

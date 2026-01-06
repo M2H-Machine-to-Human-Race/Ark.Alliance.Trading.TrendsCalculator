@@ -188,6 +188,15 @@ GEMINI_API_KEY=your_key npm test -- src/ai/ai-telemetry-accuracy.test.ts
 
 ---
 
+## Author
+
+**Armand Richelet-Kleinberg**  
+M2H.Io Ark.Alliance Ecosystem
+
+*Developed with assistance from [Claude Sonnet](https://www.anthropic.com/claude) (Anthropic AI)*
+
+---
+
 ## Related Documents
 
 - [Backend README](../Ark.Alliance.TrendsCalculator.Backend/README.md)
